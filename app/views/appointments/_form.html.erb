@@ -26,6 +26,11 @@
     <%= form.datetime_select :time, id: :appointment_time %>
   </div>
 
+  <div class="field">
+    <%= form.label :time_zone %>
+    <%= form.time_zone_select :time_zone, ActiveSupport::TimeZone.all.sort, default: "Central Time (US & Canada)" %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>

@@ -237,3 +237,1599 @@ Processing by AppointmentsController#show as HTML
 Completed 200 OK in 44ms (Views: 38.3ms | ActiveRecord: 0.3ms)
 
 
+  [1m[35m (14.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateDelayedJobs (20200418033633)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "delayed_jobs"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "delayed_jobs" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "priority" integer DEFAULT 0 NOT NULL, "attempts" integer DEFAULT 0 NOT NULL, "handler" text NOT NULL, "last_error" text, "run_at" datetime, "locked_at" datetime, "failed_at" datetime, "locked_by" varchar, "queue" varchar, "created_at" datetime, "updated_at" datetime)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE  INDEX "delayed_jobs_priority" ON "delayed_jobs" ("priority", "run_at")[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20200418033633"]]
+  [1m[35m (2.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (42.9ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='delayed_jobs_priority' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='delayed_jobs_priority' AND type='index'
+[0m
+Started GET "/appointments/new" for ::1 at 2020-04-17 22:39:13 -0500
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by AppointmentsController#new as HTML
+Completed 500 Internal Server Error in 15ms (ActiveRecord: 0.0ms)
+
+
+  
+SyntaxError (/Users/iNjaro/Sites/Rails_Apps/apptReminder/app/models/appointment.rb:18: syntax error, unexpected tSYMBEG, expecting ')'
+			:body => body,
+			 ^
+/Users/iNjaro/Sites/Rails_Apps/apptReminder/app/models/appointment.rb:30: syntax error, unexpected end-of-input, expecting keyword_end):
+  
+app/models/appointment.rb:18: syntax error, unexpected tSYMBEG, expecting ')'
+app/models/appointment.rb:30: syntax error, unexpected end-of-input, expecting keyword_end
+app/controllers/appointments_controller.rb:20:in `new'
+Started GET "/appointments/new" for ::1 at 2020-04-17 22:41:01 -0500
+Processing by AppointmentsController#new as HTML
+  Rendering appointments/new.html.erb within layouts/application
+  Rendered appointments/_form.html.erb (136.3ms)
+  Rendered appointments/new.html.erb within layouts/application (143.1ms)
+Completed 200 OK in 1047ms (Views: 1003.9ms | ActiveRecord: 2.0ms)
+
+
+Started POST "/appointments" for ::1 at 2020-04-17 22:42:03 -0500
+Processing by AppointmentsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"sGvewCdMyWZZ+KG3M04EkiKsjgunaBzw1+VY+XrBpUzxGb64ipt8KLD0sDTkZuOsMu1vpcDiiIp5YqhiIu8h3A==", "appointment"=>{"name"=>"rice and peas", "phone_number"=>"3128849493", "time(1i)"=>"2020", "time(2i)"=>"4", "time(3i)"=>"18", "time(4i)"=>"03", "time(5i)"=>"45"}, "commit"=>"Create Appointment"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.2ms)[0m  [1m[32mINSERT INTO "appointments" ("name", "phone_number", "time", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "rice and peas"], ["phone_number", "3128849493"], ["time", "2020-04-18 03:45:00"], ["created_at", "2020-04-18 03:42:03.389058"], ["updated_at", "2020-04-18 03:42:03.389058"]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "delayed_jobs" ("handler", "run_at", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["handler", "--- !ruby/object:Delayed::PerformableMethod\nobject: !ruby/object:Appointment\n  concise_attributes:\n  - !ruby/object:ActiveRecord::Attribute::FromDatabase\n    name: id\n    value_before_type_cast: 2\n  - !ruby/object:ActiveRecord::Attribute::FromDatabase\n    name: name\n    value_before_type_cast: rice and peas\n  - !ruby/object:ActiveRecord::Attribute::FromDatabase\n    name: phone_number\n    value_before_type_cast: '3128849493'\n  - !ruby/object:ActiveRecord::Attribute::FromDatabase\n    name: time\n    value_before_type_cast: 2020-04-18 03:45:00.000000000 Z\n  - !ruby/object:ActiveRecord::Attribute::FromDatabase\n    name: created_at\n    value_before_type_cast: &1 2020-04-18 03:42:03.389058000 Z\n  - !ruby/object:ActiveRecord::Attribute::FromDatabase\n    name: updated_at\n    value_before_type_cast: *1\n  new_record: false\n  active_record_yaml_version: 2\nmethod_name: :reminder_without_delay\nargs: []\n"], ["run_at", "2020-04-18 03:42:30"], ["created_at", "2020-04-18 03:42:03.445045"], ["updated_at", "2020-04-18 03:42:03.445045"]]
+  [1m[35m (2.6ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/appointments/2
+Completed 302 Found in 67ms (ActiveRecord: 5.2ms)
+
+
+Started GET "/appointments/2" for ::1 at 2020-04-17 22:42:03 -0500
+Processing by AppointmentsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mAppointment Load (0.4ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering appointments/show.html.erb within layouts/application
+  Rendered appointments/show.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 81ms (Views: 41.0ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/appointments/2/edit" for ::1 at 2020-04-17 22:42:39 -0500
+Processing by AppointmentsController#edit as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering appointments/edit.html.erb within layouts/application
+  Rendered appointments/_form.html.erb (9.1ms)
+  Rendered appointments/edit.html.erb within layouts/application (13.7ms)
+Completed 200 OK in 66ms (Views: 60.7ms | ActiveRecord: 0.2ms)
+
+
+Started PATCH "/appointments/2" for ::1 at 2020-04-17 22:42:53 -0500
+Processing by AppointmentsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"88IMtyCUWiLlxwnygLapgGrcui0pdhbx1kbBGOzpIrFpqfHOgfA2VAHs30PmtDFKR+8s042Ob8KiwWZR0lcOyg==", "appointment"=>{"name"=>"rice and peas", "phone_number"=>"3122825143", "time(1i)"=>"2020", "time(2i)"=>"4", "time(3i)"=>"18", "time(4i)"=>"03", "time(5i)"=>"45"}, "commit"=>"Update Appointment", "id"=>"2"}
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[33mUPDATE "appointments" SET "phone_number" = ?, "updated_at" = ? WHERE "appointments"."id" = ?[0m  [["phone_number", "3122825143"], ["updated_at", "2020-04-18 03:42:53.610742"], ["id", 2]]
+  [1m[35m (2.4ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/appointments/2
+Completed 302 Found in 11ms (ActiveRecord: 3.3ms)
+
+
+Started GET "/appointments/2" for ::1 at 2020-04-17 22:42:53 -0500
+Processing by AppointmentsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mAppointment Load (0.3ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering appointments/show.html.erb within layouts/application
+  Rendered appointments/show.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 147ms (Views: 140.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/appointments/2" for ::1 at 2020-04-17 22:44:23 -0500
+Processing by AppointmentsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mAppointment Load (0.4ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering appointments/show.html.erb within layouts/application
+  Rendered appointments/show.html.erb within layouts/application (2.6ms)
+Completed 200 OK in 153ms (Views: 95.9ms | ActiveRecord: 4.4ms)
+
+
+Started GET "/appointments/2/edit" for ::1 at 2020-04-17 22:45:08 -0500
+Processing by AppointmentsController#edit as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mAppointment Load (0.4ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering appointments/edit.html.erb within layouts/application
+  Rendered appointments/_form.html.erb (10.2ms)
+  Rendered appointments/edit.html.erb within layouts/application (15.7ms)
+Completed 200 OK in 103ms (Views: 78.0ms | ActiveRecord: 2.7ms)
+
+
+Started PATCH "/appointments/2" for ::1 at 2020-04-17 22:46:16 -0500
+Processing by AppointmentsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"erRVZ66wNoU7T8ZeoZnwtuoUgzCv8VANpevSMc2WUUrg36geD9Ra899kEO/Hm2h8xycVzgsJKT7RbHV48yh9MQ==", "appointment"=>{"name"=>"rice and peas", "phone_number"=>"3122825143", "time(1i)"=>"2020", "time(2i)"=>"4", "time(3i)"=>"18", "time(4i)"=>"22", "time(5i)"=>"50"}, "commit"=>"Update Appointment", "id"=>"2"}
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[33mUPDATE "appointments" SET "time" = ?, "updated_at" = ? WHERE "appointments"."id" = ?[0m  [["time", "2020-04-18 22:50:00"], ["updated_at", "2020-04-18 03:46:16.263156"], ["id", 2]]
+  [1m[35m (69.5ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/appointments/2
+Completed 302 Found in 78ms (ActiveRecord: 70.3ms)
+
+
+Started GET "/appointments/2" for ::1 at 2020-04-17 22:46:16 -0500
+Processing by AppointmentsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mAppointment Load (0.3ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering appointments/show.html.erb within layouts/application
+  Rendered appointments/show.html.erb within layouts/application (2.6ms)
+Completed 200 OK in 59ms (Views: 53.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/appointments" for ::1 at 2020-04-17 22:53:15 -0500
+Processing by AppointmentsController#index as HTML
+  [1m[36mAppointment Load (0.3ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments"[0m
+  Rendering appointments/index.html.erb within layouts/application
+  Rendered appointments/index.html.erb within layouts/application (3.6ms)
+Completed 200 OK in 68ms (Views: 58.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/appointments/new" for ::1 at 2020-04-17 22:57:24 -0500
+Processing by AppointmentsController#new as HTML
+  Rendering appointments/new.html.erb within layouts/application
+  Rendered appointments/_form.html.erb (11.7ms)
+  Rendered appointments/new.html.erb within layouts/application (17.7ms)
+Completed 200 OK in 85ms (Views: 80.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/appointments" for ::1 at 2020-04-17 22:58:30 -0500
+Processing by AppointmentsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"cO66Dz+Vr3LjitoD29wgHQ9rLgMmvq6YXWvRPgDyjGaHqup/HQ/ePDPzxrLZcOX3tZQUKpEOyLmaxDhJypXH8g==", "appointment"=>{"name"=>"sheila e", "phone_number"=>"3122825143", "time(1i)"=>"2020", "time(2i)"=>"4", "time(3i)"=>"18", "time(4i)"=>"21", "time(5i)"=>"02"}, "commit"=>"Create Appointment"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "appointments" ("name", "phone_number", "time", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "sheila e"], ["phone_number", "3122825143"], ["time", "2020-04-18 21:02:00"], ["created_at", "2020-04-18 03:58:30.804845"], ["updated_at", "2020-04-18 03:58:30.804845"]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "delayed_jobs" ("handler", "run_at", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["handler", "--- !ruby/object:Delayed::PerformableMethod\nobject: !ruby/object:Appointment\n  concise_attributes:\n  - !ruby/object:ActiveRecord::Attribute::FromDatabase\n    name: id\n    value_before_type_cast: 3\n  - !ruby/object:ActiveRecord::Attribute::FromDatabase\n    name: name\n    value_before_type_cast: sheila e\n  - !ruby/object:ActiveRecord::Attribute::FromDatabase\n    name: phone_number\n    value_before_type_cast: '3122825143'\n  - !ruby/object:ActiveRecord::Attribute::FromDatabase\n    name: time\n    value_before_type_cast: 2020-04-18 21:02:00.000000000 Z\n  - !ruby/object:ActiveRecord::Attribute::FromDatabase\n    name: created_at\n    value_before_type_cast: &1 2020-04-18 03:58:30.804845000 Z\n  - !ruby/object:ActiveRecord::Attribute::FromDatabase\n    name: updated_at\n    value_before_type_cast: *1\n  new_record: false\n  active_record_yaml_version: 2\nmethod_name: :reminder_without_delay\nargs: []\n"], ["run_at", "2020-04-18 21:00:00"], ["created_at", "2020-04-18 03:58:30.811477"], ["updated_at", "2020-04-18 03:58:30.811477"]]
+  [1m[35m (2.4ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/appointments/3
+Completed 302 Found in 17ms (ActiveRecord: 3.5ms)
+
+
+Started GET "/appointments/3" for ::1 at 2020-04-17 22:58:30 -0500
+Processing by AppointmentsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mAppointment Load (0.3ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering appointments/show.html.erb within layouts/application
+  Rendered appointments/show.html.erb within layouts/application (1.6ms)
+Completed 200 OK in 55ms (Views: 48.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/appointments" for ::1 at 2020-04-17 22:58:35 -0500
+Processing by AppointmentsController#index as HTML
+  [1m[36mAppointment Load (0.3ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments"[0m
+  Rendering appointments/index.html.erb within layouts/application
+  Rendered appointments/index.html.erb within layouts/application (2.1ms)
+Completed 200 OK in 48ms (Views: 41.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/appointments/3" for ::1 at 2020-04-17 22:58:50 -0500
+Processing by AppointmentsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering appointments/show.html.erb within layouts/application
+  Rendered appointments/show.html.erb within layouts/application (2.5ms)
+Completed 200 OK in 76ms (Views: 69.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/appointments/3" for ::1 at 2020-04-17 22:59:16 -0500
+Processing by AppointmentsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering appointments/show.html.erb within layouts/application
+  Rendered appointments/show.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 73ms (Views: 66.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/appointments/3/edit" for ::1 at 2020-04-17 22:59:47 -0500
+Processing by AppointmentsController#edit as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering appointments/edit.html.erb within layouts/application
+  Rendered appointments/_form.html.erb (7.7ms)
+  Rendered appointments/edit.html.erb within layouts/application (14.9ms)
+Completed 200 OK in 66ms (Views: 60.3ms | ActiveRecord: 0.2ms)
+
+
+Started PATCH "/appointments/3" for ::1 at 2020-04-17 23:00:01 -0500
+Processing by AppointmentsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"YiIcwhqAHsrGpPtxK0tNb4mePV/n2i+nYStppriorZ6Aw/C3NW3/oyacymeu+ZF7WA3LDYfOHBQCoBPKSGQvMg==", "appointment"=>{"name"=>"sheila e", "phone_number"=>"3122825143", "time(1i)"=>"2020", "time(2i)"=>"4", "time(3i)"=>"17", "time(4i)"=>"21", "time(5i)"=>"05"}, "commit"=>"Update Appointment", "id"=>"3"}
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[33mUPDATE "appointments" SET "time" = ?, "updated_at" = ? WHERE "appointments"."id" = ?[0m  [["time", "2020-04-17 21:05:00"], ["updated_at", "2020-04-18 04:00:01.395840"], ["id", 3]]
+  [1m[35m (2.0ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/appointments/3
+Completed 302 Found in 8ms (ActiveRecord: 2.7ms)
+
+
+Started GET "/appointments/3" for ::1 at 2020-04-17 23:00:01 -0500
+Processing by AppointmentsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering appointments/show.html.erb within layouts/application
+  Rendered appointments/show.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 49ms (Views: 44.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/appointments/3/edit" for ::1 at 2020-04-17 23:00:13 -0500
+Processing by AppointmentsController#edit as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering appointments/edit.html.erb within layouts/application
+  Rendered appointments/_form.html.erb (6.5ms)
+  Rendered appointments/edit.html.erb within layouts/application (12.1ms)
+Completed 200 OK in 60ms (Views: 54.0ms | ActiveRecord: 0.2ms)
+
+
+Started PATCH "/appointments/3" for ::1 at 2020-04-17 23:00:23 -0500
+Processing by AppointmentsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"8D89ZVEhvy5QeOA4mTqEVAhJJHSu8/41lYwmlSGUbpQS3tEQfsxeR7BA0S4ciFhA2drSJs7nzYb2B1z50VjsOA==", "appointment"=>{"name"=>"sheila e", "phone_number"=>"3122825143", "time(1i)"=>"2020", "time(2i)"=>"4", "time(3i)"=>"17", "time(4i)"=>"23", "time(5i)"=>"06"}, "commit"=>"Update Appointment", "id"=>"3"}
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE "appointments" SET "time" = ?, "updated_at" = ? WHERE "appointments"."id" = ?[0m  [["time", "2020-04-17 23:06:00"], ["updated_at", "2020-04-18 04:00:23.392288"], ["id", 3]]
+  [1m[35m (1.9ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/appointments/3
+Completed 302 Found in 9ms (ActiveRecord: 2.6ms)
+
+
+Started GET "/appointments/3" for ::1 at 2020-04-17 23:00:23 -0500
+Processing by AppointmentsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mAppointment Load (0.3ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering appointments/show.html.erb within layouts/application
+  Rendered appointments/show.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 59ms (Views: 53.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/appointments" for ::1 at 2020-04-17 23:00:27 -0500
+Processing by AppointmentsController#index as HTML
+  [1m[36mAppointment Load (0.4ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments"[0m
+  Rendering appointments/index.html.erb within layouts/application
+  Rendered appointments/index.html.erb within layouts/application (4.4ms)
+Completed 200 OK in 67ms (Views: 58.5ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/appointments/3" for ::1 at 2020-04-17 23:00:31 -0500
+Processing by AppointmentsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering appointments/show.html.erb within layouts/application
+  Rendered appointments/show.html.erb within layouts/application (2.1ms)
+Completed 200 OK in 87ms (Views: 79.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/appointments/3" for ::1 at 2020-04-17 23:04:27 -0500
+Processing by AppointmentsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mAppointment Load (0.3ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering appointments/show.html.erb within layouts/application
+  Rendered appointments/show.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 75ms (Views: 66.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/appointments/3" for ::1 at 2020-04-17 23:05:19 -0500
+Processing by AppointmentsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mAppointment Load (0.3ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering appointments/show.html.erb within layouts/application
+  Rendered appointments/show.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 101ms (Views: 92.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/appointments" for ::1 at 2020-04-17 23:06:07 -0500
+Processing by AppointmentsController#index as HTML
+  [1m[36mAppointment Load (0.3ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments"[0m
+  Rendering appointments/index.html.erb within layouts/application
+  Rendered appointments/index.html.erb within layouts/application (4.5ms)
+Completed 200 OK in 78ms (Views: 71.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/appointments/new" for ::1 at 2020-04-17 23:07:56 -0500
+Processing by AppointmentsController#new as HTML
+  Rendering appointments/new.html.erb within layouts/application
+  Rendered appointments/_form.html.erb (12.8ms)
+  Rendered appointments/new.html.erb within layouts/application (19.3ms)
+Completed 200 OK in 91ms (Views: 84.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/appointments/3" for ::1 at 2020-04-17 23:08:02 -0500
+Processing by AppointmentsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mAppointment Load (0.3ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering appointments/show.html.erb within layouts/application
+  Rendered appointments/show.html.erb within layouts/application (3.2ms)
+Completed 200 OK in 144ms (Views: 133.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/appointments" for ::1 at 2020-04-17 23:08:42 -0500
+Processing by AppointmentsController#index as HTML
+  [1m[36mAppointment Load (0.3ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments"[0m
+  Rendering appointments/index.html.erb within layouts/application
+  Rendered appointments/index.html.erb within layouts/application (5.4ms)
+Completed 200 OK in 179ms (Views: 164.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/appointments/3/edit" for ::1 at 2020-04-17 23:08:46 -0500
+Processing by AppointmentsController#edit as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mAppointment Load (0.3ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering appointments/edit.html.erb within layouts/application
+  Rendered appointments/_form.html.erb (16.9ms)
+  Rendered appointments/edit.html.erb within layouts/application (27.9ms)
+Completed 200 OK in 130ms (Views: 119.6ms | ActiveRecord: 0.3ms)
+
+
+Started PATCH "/appointments/3" for ::1 at 2020-04-17 23:09:00 -0500
+Processing by AppointmentsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"N4MdsznDY/U4qo78Ks+HHiH9W4Rgso0ASnr7QAqFdmfVYvHGFi6CnNiSv+qvfVsK8G6t1gCmvrMp8YEs+kn0yw==", "appointment"=>{"name"=>"sheila e", "phone_number"=>"3122825143", "time(1i)"=>"2020", "time(2i)"=>"4", "time(3i)"=>"17", "time(4i)"=>"23", "time(5i)"=>"11"}, "commit"=>"Update Appointment", "id"=>"3"}
+  [1m[36mAppointment Load (0.4ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (5.6ms)[0m  [1m[33mUPDATE "appointments" SET "time" = ?, "updated_at" = ? WHERE "appointments"."id" = ?[0m  [["time", "2020-04-17 23:11:00"], ["updated_at", "2020-04-18 04:09:00.760695"], ["id", 3]]
+  [1m[35m (13.8ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/appointments/3
+Completed 302 Found in 39ms (ActiveRecord: 20.0ms)
+
+
+Started GET "/appointments/3" for ::1 at 2020-04-17 23:09:00 -0500
+Processing by AppointmentsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mAppointment Load (0.4ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering appointments/show.html.erb within layouts/application
+  Rendered appointments/show.html.erb within layouts/application (2.9ms)
+Completed 200 OK in 160ms (Views: 148.0ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/appointments/3/edit" for ::1 at 2020-04-17 23:14:36 -0500
+Processing by AppointmentsController#edit as HTML
+  Parameters: {"id"=>"3"}
+Completed 500 Internal Server Error in 130ms
+
+
+  
+NoMethodError (undefined method `set_appointment' for #<AppointmentsController:0x007f8fffda2668>
+Did you mean?  new_appointment_path):
+  
+activesupport (5.1.7) lib/active_support/callbacks.rb:413:in `block in make_lambda'
+activesupport (5.1.7) lib/active_support/callbacks.rb:178:in `block (2 levels) in halting_and_conditional'
+actionpack (5.1.7) lib/abstract_controller/callbacks.rb:12:in `block (2 levels) in <module:Callbacks>'
+activesupport (5.1.7) lib/active_support/callbacks.rb:179:in `block in halting_and_conditional'
+activesupport (5.1.7) lib/active_support/callbacks.rb:507:in `block in invoke_before'
+activesupport (5.1.7) lib/active_support/callbacks.rb:507:in `each'
+activesupport (5.1.7) lib/active_support/callbacks.rb:507:in `invoke_before'
+activesupport (5.1.7) lib/active_support/callbacks.rb:130:in `run_callbacks'
+actionpack (5.1.7) lib/abstract_controller/callbacks.rb:19:in `process_action'
+actionpack (5.1.7) lib/action_controller/metal/rescue.rb:20:in `process_action'
+actionpack (5.1.7) lib/action_controller/metal/instrumentation.rb:32:in `block in process_action'
+activesupport (5.1.7) lib/active_support/notifications.rb:166:in `block in instrument'
+activesupport (5.1.7) lib/active_support/notifications/instrumenter.rb:21:in `instrument'
+activesupport (5.1.7) lib/active_support/notifications.rb:166:in `instrument'
+actionpack (5.1.7) lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+actionpack (5.1.7) lib/action_controller/metal/params_wrapper.rb:252:in `process_action'
+activerecord (5.1.7) lib/active_record/railties/controller_runtime.rb:22:in `process_action'
+actionpack (5.1.7) lib/abstract_controller/base.rb:124:in `process'
+actionview (5.1.7) lib/action_view/rendering.rb:30:in `process'
+actionpack (5.1.7) lib/action_controller/metal.rb:189:in `dispatch'
+actionpack (5.1.7) lib/action_controller/metal.rb:253:in `dispatch'
+actionpack (5.1.7) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (5.1.7) lib/action_dispatch/routing/route_set.rb:31:in `serve'
+actionpack (5.1.7) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (5.1.7) lib/action_dispatch/journey/router.rb:33:in `each'
+actionpack (5.1.7) lib/action_dispatch/journey/router.rb:33:in `serve'
+actionpack (5.1.7) lib/action_dispatch/routing/route_set.rb:844:in `call'
+rack (2.2.2) lib/rack/etag.rb:27:in `call'
+rack (2.2.2) lib/rack/conditional_get.rb:27:in `call'
+rack (2.2.2) lib/rack/head.rb:12:in `call'
+rack (2.2.2) lib/rack/session/abstract/id.rb:266:in `context'
+rack (2.2.2) lib/rack/session/abstract/id.rb:260:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/cookies.rb:613:in `call'
+activerecord (5.1.7) lib/active_record/migration.rb:556:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/callbacks.rb:26:in `block in call'
+activesupport (5.1.7) lib/active_support/callbacks.rb:97:in `run_callbacks'
+actionpack (5.1.7) lib/action_dispatch/middleware/callbacks.rb:24:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/debug_exceptions.rb:59:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.7) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.7) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.7) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.7) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.7) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.7) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.2.2) lib/rack/method_override.rb:24:in `call'
+rack (2.2.2) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.7) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.2.2) lib/rack/sendfile.rb:110:in `call'
+railties (5.1.7) lib/rails/engine.rb:522:in `call'
+puma (3.12.4) lib/puma/configuration.rb:227:in `call'
+puma (3.12.4) lib/puma/server.rb:675:in `handle_request'
+puma (3.12.4) lib/puma/server.rb:476:in `process_client'
+puma (3.12.4) lib/puma/server.rb:334:in `block in run'
+puma (3.12.4) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/appointments/3" for ::1 at 2020-04-17 23:16:48 -0500
+Processing by AppointmentsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mAppointment Load (0.5ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering appointments/show.html.erb within layouts/application
+  Rendered appointments/show.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 137ms (Views: 94.2ms | ActiveRecord: 3.8ms)
+
+
+Started GET "/appointments/3/edit" for ::1 at 2020-04-17 23:16:54 -0500
+Processing by AppointmentsController#edit as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mAppointment Load (0.3ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering appointments/edit.html.erb within layouts/application
+  Rendered appointments/_form.html.erb (21.4ms)
+  Rendered appointments/edit.html.erb within layouts/application (32.4ms)
+Completed 200 OK in 203ms (Views: 193.2ms | ActiveRecord: 0.3ms)
+
+
+Started PATCH "/appointments/3" for ::1 at 2020-04-17 23:17:09 -0500
+Processing by AppointmentsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"y21KcEAXUA6SD75tl3Pvygl4QluIO2Tc02TYNoX0vgwpjKYFb/qxZ3I3j3sSwTPe2Ou0CegvV2+w76JadTg8oA==", "appointment"=>{"name"=>"sheila e", "phone_number"=>"3122825143", "time(1i)"=>"2020", "time(2i)"=>"4", "time(3i)"=>"17", "time(4i)"=>"23", "time(5i)"=>"20"}, "commit"=>"Update Appointment", "id"=>"3"}
+  [1m[36mAppointment Load (0.3ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[33mUPDATE "appointments" SET "time" = ?, "updated_at" = ? WHERE "appointments"."id" = ?[0m  [["time", "2020-04-17 23:20:00"], ["updated_at", "2020-04-18 04:17:09.324092"], ["id", 3]]
+  [1m[35m (2.1ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/appointments/3
+Completed 302 Found in 17ms (ActiveRecord: 3.4ms)
+
+
+Started GET "/appointments/3" for ::1 at 2020-04-17 23:17:09 -0500
+Processing by AppointmentsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mAppointment Load (0.3ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering appointments/show.html.erb within layouts/application
+  Rendered appointments/show.html.erb within layouts/application (2.6ms)
+Completed 200 OK in 98ms (Views: 90.3ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/appointments/3" for ::1 at 2020-04-17 23:18:43 -0500
+Processing by AppointmentsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mAppointment Load (0.3ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering appointments/show.html.erb within layouts/application
+  Rendered appointments/show.html.erb within layouts/application (28.0ms)
+Completed 500 Internal Server Error in 99ms (ActiveRecord: 0.3ms)
+
+
+  
+ActionView::Template::Error (undefined method `timezone' for Fri, 17 Apr 2020 23:20:00 UTC +00:00:Time
+Did you mean?  time_with_zone
+Did you mean?  time_with_zone):
+    13: <p>
+    14:   <strong>Time:</strong>
+    15:   <%= @appointment.time %>
+    16:   <%= @appointment.time.timezone %>
+    17: 
+    18: </p>
+    19: <p><%=Time.now %></p>
+  
+app/views/appointments/show.html.erb:16:in `_app_views_appointments_show_html_erb__1188187604431742723_70128224803960'
+Started GET "/appointments/3" for ::1 at 2020-04-17 23:19:06 -0500
+Processing by AppointmentsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mAppointment Load (0.3ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering appointments/show.html.erb within layouts/application
+  Rendered appointments/show.html.erb within layouts/application (10.2ms)
+Completed 500 Internal Server Error in 47ms (ActiveRecord: 0.3ms)
+
+
+  
+ActionView::Template::Error (wrong number of arguments (given 0, expected 2)):
+    13: <p>
+    14:   <strong>Time:</strong>
+    15:   <%= @appointment.time %>
+    16:   <%= @appointment.time.time_with_zone %>
+    17: 
+    18: </p>
+    19: <p><%=Time.now %></p>
+  
+app/views/appointments/show.html.erb:16:in `_app_views_appointments_show_html_erb__1188187604431742723_70128223158420'
+Started GET "/appointments/3" for ::1 at 2020-04-17 23:19:42 -0500
+Processing by AppointmentsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mAppointment Load (0.3ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering appointments/show.html.erb within layouts/application
+  Rendered appointments/show.html.erb within layouts/application (104.4ms)
+Completed 500 Internal Server Error in 154ms (ActiveRecord: 0.3ms)
+
+
+  
+ActionView::Template::Error (undefined method `time_with_zone' for #<Appointment:0x007f9001108220>
+Did you mean?  time_will_change!):
+    13: <p>
+    14:   <strong>Time:</strong>
+    15:   <%= @appointment.time %>
+    16:   <%= @appointment.time_with_zone %>
+    17: 
+    18: </p>
+    19: <p><%=Time.now %></p>
+  
+app/views/appointments/show.html.erb:16:in `_app_views_appointments_show_html_erb__1188187604431742723_70128220329340'
+Started GET "/appointments/3" for ::1 at 2020-04-17 23:20:07 -0500
+Processing by AppointmentsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mAppointment Load (0.3ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering appointments/show.html.erb within layouts/application
+  Rendered appointments/show.html.erb within layouts/application (2.7ms)
+Completed 200 OK in 100ms (Views: 90.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/appointments/3" for ::1 at 2020-04-17 23:25:51 -0500
+Processing by AppointmentsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering appointments/show.html.erb within layouts/application
+  Rendered appointments/show.html.erb within layouts/application (1.2ms)
+Completed 200 OK in 116ms (Views: 89.6ms | ActiveRecord: 2.2ms)
+
+
+Started GET "/appointments" for ::1 at 2020-04-17 23:25:58 -0500
+Processing by AppointmentsController#index as HTML
+  [1m[36mAppointment Load (0.4ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments"[0m
+  Rendering appointments/index.html.erb within layouts/application
+  Rendered appointments/index.html.erb within layouts/application (4.8ms)
+Completed 200 OK in 85ms (Views: 76.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/appointments/3/edit" for ::1 at 2020-04-17 23:26:02 -0500
+Processing by AppointmentsController#edit as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering appointments/edit.html.erb within layouts/application
+  Rendered appointments/_form.html.erb (422.4ms)
+  Rendered appointments/edit.html.erb within layouts/application (427.7ms)
+Completed 500 Internal Server Error in 449ms (ActiveRecord: 0.2ms)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `f' for #<#<Class:0x007f9000afd808>:0x007f8fff430df0>):
+    27:   </div>
+    28: 
+    29:   <div class="field">
+    30:     <%= f.label :time_zone %>
+    31:     <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.all.sort, default: "Central Time (US & Canada)" %>
+    32:   </div>
+    33: 
+  
+app/views/appointments/_form.html.erb:30:in `block in _app_views_appointments__form_html_erb__3908201912615087147_70128230946320'
+app/views/appointments/_form.html.erb:1:in `_app_views_appointments__form_html_erb__3908201912615087147_70128230946320'
+app/views/appointments/edit.html.erb:3:in `_app_views_appointments_edit_html_erb__301325262649808166_70128219819180'
+Started GET "/appointments/3/edit" for ::1 at 2020-04-17 23:26:51 -0500
+Processing by AppointmentsController#edit as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering appointments/edit.html.erb within layouts/application
+  Rendered appointments/_form.html.erb (1027.9ms)
+  Rendered appointments/edit.html.erb within layouts/application (1033.2ms)
+Completed 200 OK in 1108ms (Views: 1097.9ms | ActiveRecord: 0.2ms)
+
+
+Started PATCH "/appointments/3" for ::1 at 2020-04-17 23:27:42 -0500
+Processing by AppointmentsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"YngkzBwnBUJGOu1bS5n9QriT4otHQpSVNhgf7js8aRYjCkS0sfCwDK82/NicsRp8qNIDJSDIAO+Yn+91YxLthg==", "appointment"=>{"name"=>"sheila e", "phone_number"=>"3122825143", "time(1i)"=>"2020", "time(2i)"=>"4", "time(3i)"=>"17", "time(4i)"=>"23", "time(5i)"=>"30", "time_zone"=>"Central Time (US & Canada)"}, "commit"=>"Update Appointment", "id"=>"3"}
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+Unpermitted parameter: :time_zone
+  [1m[35m (0.3ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[33mUPDATE "appointments" SET "time" = ?, "updated_at" = ? WHERE "appointments"."id" = ?[0m  [["time", "2020-04-17 23:30:00"], ["updated_at", "2020-04-18 04:27:42.986370"], ["id", 3]]
+  [1m[35m (2.1ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/appointments/3
+Completed 302 Found in 11ms (ActiveRecord: 3.1ms)
+
+
+Started GET "/appointments/3" for ::1 at 2020-04-17 23:27:43 -0500
+Processing by AppointmentsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering appointments/show.html.erb within layouts/application
+  Rendered appointments/show.html.erb within layouts/application (1.6ms)
+Completed 200 OK in 50ms (Views: 45.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/appointments" for ::1 at 2020-04-17 23:29:56 -0500
+Processing by AppointmentsController#index as HTML
+  [1m[36mAppointment Load (0.3ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments"[0m
+  Rendering appointments/index.html.erb within layouts/application
+  Rendered appointments/index.html.erb within layouts/application (3.7ms)
+Completed 200 OK in 83ms (Views: 76.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/appointments/3" for ::1 at 2020-04-17 23:30:01 -0500
+Processing by AppointmentsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering appointments/show.html.erb within layouts/application
+  Rendered appointments/show.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 79ms (Views: 71.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/appointments/" for ::1 at 2020-04-17 23:50:29 -0500
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by AppointmentsController#index as HTML
+Completed 500 Internal Server Error in 23ms (ActiveRecord: 0.0ms)
+
+
+  
+SyntaxError (/Users/iNjaro/Sites/Rails_Apps/apptReminder/app/models/appointment.rb:29: no .<digit> floating literal anymore; put 0 before dot
+, :run_at => Proc.new { |i| i.5.minutes.from_now }
+                              ^
+/Users/iNjaro/Sites/Rails_Apps/apptReminder/app/models/appointment.rb:29: syntax error, unexpected tINTEGER, expecting '('
+ :run_at => Proc.new { |i| i.5.minutes.from_now }
+                              ^):
+  
+app/models/appointment.rb:29: no .<digit> floating literal anymore; put 0 before dot
+app/models/appointment.rb:29: syntax error, unexpected tINTEGER, expecting '('
+app/controllers/appointments_controller.rb:7:in `index'
+Started GET "/appointments/" for ::1 at 2020-04-17 23:51:29 -0500
+Processing by AppointmentsController#index as HTML
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments"[0m
+  Rendering appointments/index.html.erb within layouts/application
+  Rendered appointments/index.html.erb within layouts/application (6.2ms)
+Completed 200 OK in 735ms (Views: 690.8ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/appointments/new" for ::1 at 2020-04-17 23:51:33 -0500
+Processing by AppointmentsController#new as HTML
+  Rendering appointments/new.html.erb within layouts/application
+  Rendered appointments/_form.html.erb (1841.8ms)
+  Rendered appointments/new.html.erb within layouts/application (1876.2ms)
+Completed 200 OK in 1978ms (Views: 1972.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/appointments" for ::1 at 2020-04-17 23:52:20 -0500
+Processing by AppointmentsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"aCoOVXwOvSTp+HdSRl7XNiWgTFsgcAEtrIopXZzT8lmfbl4lXpTMajmBa+NE8hLcn192cpfAZwxrJcAqVrS5zQ==", "appointment"=>{"name"=>"quest", "phone_number"=>"13122825143", "time(1i)"=>"2020", "time(2i)"=>"4", "time(3i)"=>"18", "time(4i)"=>"00", "time(5i)"=>"59", "time_zone"=>"Central Time (US & Canada)"}, "commit"=>"Create Appointment"}
+Unpermitted parameter: :time_zone
+Unpermitted parameter: :time_zone
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "appointments" ("name", "phone_number", "time", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "quest"], ["phone_number", "13122825143"], ["time", "2020-04-18 00:59:00"], ["created_at", "2020-04-18 04:52:20.060224"], ["updated_at", "2020-04-18 04:52:20.060224"]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "delayed_jobs" ("handler", "run_at", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["handler", "--- !ruby/object:Delayed::PerformableMethod\nobject: !ruby/object:Appointment\n  concise_attributes:\n  - !ruby/object:ActiveRecord::Attribute::FromDatabase\n    name: id\n    value_before_type_cast: 4\n  - !ruby/object:ActiveRecord::Attribute::FromDatabase\n    name: name\n    value_before_type_cast: quest\n  - !ruby/object:ActiveRecord::Attribute::FromDatabase\n    name: phone_number\n    value_before_type_cast: '13122825143'\n  - !ruby/object:ActiveRecord::Attribute::FromDatabase\n    name: time\n    value_before_type_cast: 2020-04-18 00:59:00.000000000 Z\n  - !ruby/object:ActiveRecord::Attribute::FromDatabase\n    name: created_at\n    value_before_type_cast: &1 2020-04-18 04:52:20.060224000 Z\n  - !ruby/object:ActiveRecord::Attribute::FromDatabase\n    name: updated_at\n    value_before_type_cast: *1\n  new_record: false\n  active_record_yaml_version: 2\nmethod_name: :reminder_without_delay\nargs: []\n"], ["run_at", "2020-04-18 04:57:20.063337"], ["created_at", "2020-04-18 04:52:20.085960"], ["updated_at", "2020-04-18 04:52:20.085960"]]
+  [1m[35m (2.5ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/appointments/4
+Completed 302 Found in 37ms (ActiveRecord: 4.1ms)
+
+
+Started GET "/appointments/4" for ::1 at 2020-04-17 23:52:20 -0500
+Processing by AppointmentsController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mAppointment Load (0.5ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  Rendering appointments/show.html.erb within layouts/application
+  Rendered appointments/show.html.erb within layouts/application (1.2ms)
+Completed 200 OK in 69ms (Views: 47.4ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/appointments/4/edit" for ::1 at 2020-04-17 23:52:36 -0500
+Processing by AppointmentsController#edit as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  Rendering appointments/edit.html.erb within layouts/application
+  Rendered appointments/_form.html.erb (54.1ms)
+  Rendered appointments/edit.html.erb within layouts/application (70.4ms)
+Completed 200 OK in 124ms (Views: 119.0ms | ActiveRecord: 0.2ms)
+
+
+Started PATCH "/appointments/4" for ::1 at 2020-04-17 23:52:49 -0500
+Processing by AppointmentsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"QlHiRjhxWXVUHHPwnnaF0gCyOYsmUXxIfxkhH2M9ba77fH/SlhV7zxjfzthq0AUt9V4V9qPi23fEs6/APBchAA==", "appointment"=>{"name"=>"quest", "phone_number"=>"13122825143", "time(1i)"=>"2020", "time(2i)"=>"4", "time(3i)"=>"17", "time(4i)"=>"00", "time(5i)"=>"59", "time_zone"=>"Central Time (US & Canada)"}, "commit"=>"Update Appointment", "id"=>"4"}
+  [1m[36mAppointment Load (0.3ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+Unpermitted parameter: :time_zone
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (27.3ms)[0m  [1m[33mUPDATE "appointments" SET "time" = ?, "updated_at" = ? WHERE "appointments"."id" = ?[0m  [["time", "2020-04-17 00:59:00"], ["updated_at", "2020-04-18 04:52:49.259715"], ["id", 4]]
+  [1m[35m (1.7ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/appointments/4
+Completed 302 Found in 38ms (ActiveRecord: 29.4ms)
+
+
+Started GET "/appointments/4" for ::1 at 2020-04-17 23:52:49 -0500
+Processing by AppointmentsController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mAppointment Load (0.3ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  Rendering appointments/show.html.erb within layouts/application
+  Rendered appointments/show.html.erb within layouts/application (1.6ms)
+Completed 200 OK in 70ms (Views: 63.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/appointments/4" for ::1 at 2020-04-17 23:56:19 -0500
+Processing by AppointmentsController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  Rendering appointments/show.html.erb within layouts/application
+  Rendered appointments/show.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 85ms (Views: 79.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/appointments/4/edit" for ::1 at 2020-04-18 00:08:13 -0500
+Processing by AppointmentsController#edit as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mAppointment Load (0.3ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  Rendering appointments/edit.html.erb within layouts/application
+  Rendered appointments/_form.html.erb (113.8ms)
+  Rendered appointments/edit.html.erb within layouts/application (142.6ms)
+Completed 200 OK in 425ms (Views: 416.0ms | ActiveRecord: 0.3ms)
+
+
+Started PATCH "/appointments/4" for ::1 at 2020-04-18 00:08:49 -0500
+Processing by AppointmentsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"CoSGehvOrzkh0MLfWF6TFckwqZS55fV89BqqpEyGyAKzqRvutaqNg20Tf/es+BPqPNyF6TxWUkNPsCR7E6yErA==", "appointment"=>{"name"=>"quest", "phone_number"=>"13122825143", "time(1i)"=>"2020", "time(2i)"=>"4", "time(3i)"=>"18", "time(4i)"=>"00", "time(5i)"=>"15", "time_zone"=>"Central Time (US & Canada)"}, "commit"=>"Update Appointment", "id"=>"4"}
+  [1m[36mAppointment Load (0.3ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+Unpermitted parameter: :time_zone
+  [1m[35m (0.3ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[33mUPDATE "appointments" SET "time" = ?, "updated_at" = ? WHERE "appointments"."id" = ?[0m  [["time", "2020-04-18 00:15:00"], ["updated_at", "2020-04-18 05:08:49.114216"], ["id", 4]]
+  [1m[35m (1.9ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/appointments/4
+Completed 302 Found in 11ms (ActiveRecord: 2.9ms)
+
+
+Started GET "/appointments/4" for ::1 at 2020-04-18 00:08:49 -0500
+Processing by AppointmentsController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mAppointment Load (0.3ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  Rendering appointments/show.html.erb within layouts/application
+  Rendered appointments/show.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 67ms (Views: 60.3ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/appointments/4" for ::1 at 2020-04-18 00:10:41 -0500
+Processing by AppointmentsController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mAppointment Load (0.3ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  Rendering appointments/show.html.erb within layouts/application
+  Rendered appointments/show.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 115ms (Views: 88.0ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/appointments/4/edit" for ::1 at 2020-04-18 00:10:47 -0500
+Processing by AppointmentsController#edit as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  Rendering appointments/edit.html.erb within layouts/application
+  Rendered appointments/_form.html.erb (39.6ms)
+  Rendered appointments/edit.html.erb within layouts/application (94.1ms)
+Completed 200 OK in 148ms (Views: 139.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/appointments/4" for ::1 at 2020-04-18 00:10:53 -0500
+Processing by AppointmentsController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  Rendering appointments/show.html.erb within layouts/application
+  Rendered appointments/show.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 52ms (Views: 47.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/appointments" for ::1 at 2020-04-18 00:42:29 -0500
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by AppointmentsController#index as HTML
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments"[0m
+  Rendering appointments/index.html.erb within layouts/application
+  Rendered appointments/index.html.erb within layouts/application (5.4ms)
+Completed 200 OK in 919ms (Views: 884.1ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/appointments/4/edit" for ::1 at 2020-04-18 00:42:40 -0500
+Processing by AppointmentsController#edit as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mAppointment Load (0.4ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  Rendering appointments/edit.html.erb within layouts/application
+  Rendered appointments/_form.html.erb (1102.8ms)
+  Rendered appointments/edit.html.erb within layouts/application (1118.6ms)
+Completed 200 OK in 1202ms (Views: 1177.7ms | ActiveRecord: 0.4ms)
+
+
+Started PATCH "/appointments/4" for ::1 at 2020-04-18 00:43:00 -0500
+Processing by AppointmentsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"SPh3mUnLIoWA7CFbEvso0/i6qgvovF2xIGBtkWiIzJrx1eoN568AP8wvnHPmXagsDVaGdm0P+o6byuNON6KANA==", "appointment"=>{"name"=>"quest", "phone_number"=>"13122825143", "time(1i)"=>"2020", "time(2i)"=>"4", "time(3i)"=>"18", "time(4i)"=>"00", "time(5i)"=>"49", "time_zone"=>"Central Time (US & Canada)"}, "commit"=>"Update Appointment", "id"=>"4"}
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+Unpermitted parameter: :time_zone
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[33mUPDATE "appointments" SET "time" = ?, "updated_at" = ? WHERE "appointments"."id" = ?[0m  [["time", "2020-04-18 00:49:00"], ["updated_at", "2020-04-18 05:43:00.079136"], ["id", 4]]
+  [1m[35m (2.9ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/appointments/4
+Completed 302 Found in 13ms (ActiveRecord: 3.8ms)
+
+
+Started GET "/appointments/4" for ::1 at 2020-04-18 00:43:00 -0500
+Processing by AppointmentsController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mAppointment Load (0.4ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  Rendering appointments/show.html.erb within layouts/application
+  Rendered appointments/show.html.erb within layouts/application (1.2ms)
+Completed 200 OK in 52ms (Views: 44.8ms | ActiveRecord: 0.4ms)
+
+
+  [1m[36mAppointment Load (0.3ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" ORDER BY "appointments"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "delayed_jobs" ("handler", "run_at", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["handler", "--- !ruby/object:Delayed::PerformableMethod\nobject: !ruby/object:Appointment\n  concise_attributes:\n  - !ruby/object:ActiveRecord::Attribute::FromDatabase\n    name: time\n    value_before_type_cast: '2020-04-18 00:49:00'\n  - !ruby/object:ActiveRecord::Attribute::FromDatabase\n    name: id\n    value_before_type_cast: 4\n  - !ruby/object:ActiveRecord::Attribute::FromDatabase\n    name: name\n    value_before_type_cast: quest\n  - !ruby/object:ActiveRecord::Attribute::FromDatabase\n    name: phone_number\n    value_before_type_cast: '13122825143'\n  - !ruby/object:ActiveRecord::Attribute::FromDatabase\n    name: created_at\n    value_before_type_cast: '2020-04-18 04:52:20.060224'\n  - !ruby/object:ActiveRecord::Attribute::FromDatabase\n    name: updated_at\n    value_before_type_cast: '2020-04-18 05:43:00.079136'\n  new_record: false\n  active_record_yaml_version: 2\nmethod_name: :reminder_without_delay\nargs: []\n"], ["run_at", "2020-04-18 00:47:00"], ["created_at", "2020-04-18 06:03:27.059572"], ["updated_at", "2020-04-18 06:03:27.059572"]]
+  [1m[35m (2.1ms)[0m  [1m[36mcommit transaction[0m
+Started GET "/appointments" for ::1 at 2020-04-18 01:58:14 -0500
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by AppointmentsController#index as HTML
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments"[0m
+  Rendering appointments/index.html.erb within layouts/application
+  Rendered appointments/index.html.erb within layouts/application (5.2ms)
+Completed 200 OK in 633ms (Views: 588.6ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/appointments/new" for ::1 at 2020-04-18 01:58:16 -0500
+Processing by AppointmentsController#new as HTML
+  Rendering appointments/new.html.erb within layouts/application
+  Rendered appointments/_form.html.erb (1011.4ms)
+  Rendered appointments/new.html.erb within layouts/application (1055.0ms)
+Completed 200 OK in 1108ms (Views: 1102.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/appointments" for ::1 at 2020-04-18 01:59:00 -0500
+Processing by AppointmentsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"XNRBxOw0glvbXFd/UiadJ8BaCiMS0QvZo4QRx8T74BKrkBG0zq7zFQslS85QiljNeqUwCqVhbfhkK/iwDpyrhg==", "appointment"=>{"name"=>"chicken and waffles", "phone_number"=>"13122825143", "time(1i)"=>"2020", "time(2i)"=>"4", "time(3i)"=>"18", "time(4i)"=>"02", "time(5i)"=>"02", "time_zone"=>"Central Time (US & Canada)"}, "commit"=>"Create Appointment"}
+Unpermitted parameter: :time_zone
+Unpermitted parameter: :time_zone
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "appointments" ("name", "phone_number", "time", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "chicken and waffles"], ["phone_number", "13122825143"], ["time", "2020-04-18 02:02:00"], ["created_at", "2020-04-18 06:59:00.512179"], ["updated_at", "2020-04-18 06:59:00.512179"]]
+  [1m[35m (1.1ms)[0m  [1m[31mrollback transaction[0m
+Completed 500 Internal Server Error in 48ms (ActiveRecord: 1.8ms)
+
+
+  
+NoMethodError (undefined method `TWILIO_AUTH_TOKEN' for #<ApptReminder::Application:0x007fcc87ed1448>):
+  
+app/models/appointment.rb:12:in `reminder'
+app/controllers/appointments_controller.rb:34:in `block in create'
+app/controllers/appointments_controller.rb:33:in `create'
+Started POST "/appointments" for ::1 at 2020-04-18 01:59:48 -0500
+Processing by AppointmentsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"XNRBxOw0glvbXFd/UiadJ8BaCiMS0QvZo4QRx8T74BKrkBG0zq7zFQslS85QiljNeqUwCqVhbfhkK/iwDpyrhg==", "appointment"=>{"name"=>"chicken and waffles", "phone_number"=>"13122825143", "time(1i)"=>"2020", "time(2i)"=>"4", "time(3i)"=>"18", "time(4i)"=>"02", "time(5i)"=>"02", "time_zone"=>"Central Time (US & Canada)"}, "commit"=>"Create Appointment"}
+Unpermitted parameter: :time_zone
+Unpermitted parameter: :time_zone
+  [1m[35m (0.7ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "appointments" ("name", "phone_number", "time", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "chicken and waffles"], ["phone_number", "13122825143"], ["time", "2020-04-18 02:02:00"], ["created_at", "2020-04-18 06:59:48.258664"], ["updated_at", "2020-04-18 06:59:48.258664"]]
+  [1m[35m (0.7ms)[0m  [1m[31mrollback transaction[0m
+Completed 500 Internal Server Error in 295ms (ActiveRecord: 3.8ms)
+
+
+  
+Twilio::REST::RestError ([HTTP 404] 20404 : Unable to create record
+The requested resource /2010-04-01/Accounts//Messages.json was not found
+https://www.twilio.com/docs/errors/20404
+
+):
+  
+app/models/appointment.rb:15:in `reminder'
+app/controllers/appointments_controller.rb:34:in `block in create'
+app/controllers/appointments_controller.rb:33:in `create'
+Started POST "/appointments" for ::1 at 2020-04-18 02:01:55 -0500
+Processing by AppointmentsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"XNRBxOw0glvbXFd/UiadJ8BaCiMS0QvZo4QRx8T74BKrkBG0zq7zFQslS85QiljNeqUwCqVhbfhkK/iwDpyrhg==", "appointment"=>{"name"=>"chicken and waffles", "phone_number"=>"13122825143", "time(1i)"=>"2020", "time(2i)"=>"4", "time(3i)"=>"18", "time(4i)"=>"02", "time(5i)"=>"10", "time_zone"=>"Central Time (US & Canada)"}, "commit"=>"Create Appointment"}
+Unpermitted parameter: :time_zone
+Unpermitted parameter: :time_zone
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "appointments" ("name", "phone_number", "time", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "chicken and waffles"], ["phone_number", "13122825143"], ["time", "2020-04-18 02:10:00"], ["created_at", "2020-04-18 07:01:55.726556"], ["updated_at", "2020-04-18 07:01:55.726556"]]
+  [1m[35m (1.0ms)[0m  [1m[31mrollback transaction[0m
+Completed 500 Internal Server Error in 232ms (ActiveRecord: 2.0ms)
+
+
+  
+Twilio::REST::RestError ([HTTP 404] 20404 : Unable to create record
+The requested resource /2010-04-01/Accounts//Messages.json was not found
+https://www.twilio.com/docs/errors/20404
+
+):
+  
+app/models/appointment.rb:15:in `reminder'
+app/controllers/appointments_controller.rb:34:in `block in create'
+app/controllers/appointments_controller.rb:33:in `create'
+Started GET "/appointments/new" for ::1 at 2020-04-18 02:03:44 -0500
+Processing by AppointmentsController#new as HTML
+  Rendering appointments/new.html.erb within layouts/application
+  Rendered appointments/_form.html.erb (40.4ms)
+  Rendered appointments/new.html.erb within layouts/application (62.7ms)
+Completed 200 OK in 107ms (Views: 102.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/appointments" for ::1 at 2020-04-18 02:04:05 -0500
+Processing by AppointmentsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"osRwFQwXYhHX03Oz4iIa/pBjldpg5lGOroGVBB1YAD7jthBtocDXXz7fYjA1Cv3AgCJ0dAdsxfQABmWfRXaErg==", "appointment"=>{"name"=>"chicken and waffles", "phone_number"=>"13122825143", "time(1i)"=>"2020", "time(2i)"=>"4", "time(3i)"=>"18", "time(4i)"=>"02", "time(5i)"=>"10", "time_zone"=>"Central Time (US & Canada)"}, "commit"=>"Create Appointment"}
+Unpermitted parameter: :time_zone
+Unpermitted parameter: :time_zone
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "appointments" ("name", "phone_number", "time", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "chicken and waffles"], ["phone_number", "13122825143"], ["time", "2020-04-18 02:10:00"], ["created_at", "2020-04-18 07:04:05.382659"], ["updated_at", "2020-04-18 07:04:05.382659"]]
+  [1m[35m (0.7ms)[0m  [1m[31mrollback transaction[0m
+Completed 500 Internal Server Error in 215ms (ActiveRecord: 1.4ms)
+
+
+  
+Twilio::REST::RestError ([HTTP 404] 20404 : Unable to create record
+The requested resource /2010-04-01/Accounts//Messages.json was not found
+https://www.twilio.com/docs/errors/20404
+
+):
+  
+app/models/appointment.rb:15:in `reminder'
+app/controllers/appointments_controller.rb:34:in `block in create'
+app/controllers/appointments_controller.rb:33:in `create'
+Started POST "/appointments" for ::1 at 2020-04-18 02:06:40 -0500
+Processing by AppointmentsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"osRwFQwXYhHX03Oz4iIa/pBjldpg5lGOroGVBB1YAD7jthBtocDXXz7fYjA1Cv3AgCJ0dAdsxfQABmWfRXaErg==", "appointment"=>{"name"=>"chicken and waffles", "phone_number"=>"13122825143", "time(1i)"=>"2020", "time(2i)"=>"4", "time(3i)"=>"18", "time(4i)"=>"02", "time(5i)"=>"10", "time_zone"=>"Central Time (US & Canada)"}, "commit"=>"Create Appointment"}
+Unpermitted parameter: :time_zone
+Completed 500 Internal Server Error in 3ms
+
+
+  
+SyntaxError (/Users/iNjaro/Sites/Rails_Apps/apptReminder/app/models/appointment.rb:9: syntax error, unexpected ':', expecting keyword_end
+TWILIO_NUMBER: '18143034098'
+              ^
+/Users/iNjaro/Sites/Rails_Apps/apptReminder/app/models/appointment.rb:10: syntax error, unexpected ':', expecting keyword_end
+TWILIO_ACCOUNT_SID: 'AC41b9edf1362ea775dc690a2eb7
+                   ^
+/Users/iNjaro/Sites/Rails_Apps/apptReminder/app/models/appointment.rb:11: syntax error, unexpected ':', expecting keyword_end
+AUTH_TOKEN: '0cf06273c5eeca10153b791af364
+           ^):
+  
+app/models/appointment.rb:9: syntax error, unexpected ':', expecting keyword_end
+app/models/appointment.rb:10: syntax error, unexpected ':', expecting keyword_end
+app/models/appointment.rb:11: syntax error, unexpected ':', expecting keyword_end
+app/controllers/appointments_controller.rb:31:in `create'
+Started POST "/appointments" for ::1 at 2020-04-18 02:07:38 -0500
+Processing by AppointmentsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"osRwFQwXYhHX03Oz4iIa/pBjldpg5lGOroGVBB1YAD7jthBtocDXXz7fYjA1Cv3AgCJ0dAdsxfQABmWfRXaErg==", "appointment"=>{"name"=>"chicken and waffles", "phone_number"=>"13122825143", "time(1i)"=>"2020", "time(2i)"=>"4", "time(3i)"=>"18", "time(4i)"=>"02", "time(5i)"=>"10", "time_zone"=>"Central Time (US & Canada)"}, "commit"=>"Create Appointment"}
+Unpermitted parameter: :time_zone
+Unpermitted parameter: :time_zone
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "appointments" ("name", "phone_number", "time", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "chicken and waffles"], ["phone_number", "13122825143"], ["time", "2020-04-18 02:10:00"], ["created_at", "2020-04-18 07:07:38.939452"], ["updated_at", "2020-04-18 07:07:38.939452"]]
+  [1m[35m (0.6ms)[0m  [1m[31mrollback transaction[0m
+Completed 500 Internal Server Error in 35ms (ActiveRecord: 3.8ms)
+
+
+  
+NameError (uninitialized constant Appointment::TWILIO_AUTH_TOKEN):
+  
+app/models/appointment.rb:17:in `reminder'
+app/controllers/appointments_controller.rb:34:in `block in create'
+app/controllers/appointments_controller.rb:33:in `create'
+Started POST "/appointments" for ::1 at 2020-04-18 02:08:23 -0500
+Processing by AppointmentsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"osRwFQwXYhHX03Oz4iIa/pBjldpg5lGOroGVBB1YAD7jthBtocDXXz7fYjA1Cv3AgCJ0dAdsxfQABmWfRXaErg==", "appointment"=>{"name"=>"chicken and waffles", "phone_number"=>"13122825143", "time(1i)"=>"2020", "time(2i)"=>"4", "time(3i)"=>"18", "time(4i)"=>"02", "time(5i)"=>"10", "time_zone"=>"Central Time (US & Canada)"}, "commit"=>"Create Appointment"}
+Unpermitted parameter: :time_zone
+Unpermitted parameter: :time_zone
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "appointments" ("name", "phone_number", "time", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "chicken and waffles"], ["phone_number", "13122825143"], ["time", "2020-04-18 02:10:00"], ["created_at", "2020-04-18 07:08:23.646679"], ["updated_at", "2020-04-18 07:08:23.646679"]]
+  [1m[35m (2.1ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/appointments/5
+Completed 302 Found in 311ms (ActiveRecord: 3.9ms)
+
+
+Started GET "/appointments/5" for ::1 at 2020-04-18 02:08:23 -0500
+Processing by AppointmentsController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mAppointment Load (0.4ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  Rendering appointments/show.html.erb within layouts/application
+  Rendered appointments/show.html.erb within layouts/application (2.5ms)
+Completed 200 OK in 71ms (Views: 48.7ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/appointments/5/edit" for ::1 at 2020-04-18 02:12:07 -0500
+Processing by AppointmentsController#edit as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mAppointment Load (0.4ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  Rendering appointments/edit.html.erb within layouts/application
+  Rendered appointments/_form.html.erb (56.5ms)
+  Rendered appointments/edit.html.erb within layouts/application (80.1ms)
+Completed 200 OK in 156ms (Views: 132.1ms | ActiveRecord: 3.3ms)
+
+
+Started PATCH "/appointments/5" for ::1 at 2020-04-18 02:12:46 -0500
+Processing by AppointmentsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"8+9civV9m7deOP9bjmzqLXym8MgzDJq1EKcw7R3pzrla3mwIYLMYVubnDH+1sw7z2EAOinsafW/ACZycCLo5ZQ==", "appointment"=>{"name"=>"chicken and waffles", "phone_number"=>"13122825143", "time(1i)"=>"2020", "time(2i)"=>"4", "time(3i)"=>"18", "time(4i)"=>"02", "time(5i)"=>"15", "time_zone"=>"Central Time (US & Canada)"}, "commit"=>"Update Appointment", "id"=>"5"}
+  [1m[36mAppointment Load (0.4ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+Unpermitted parameter: :time_zone
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (2.0ms)[0m  [1m[33mUPDATE "appointments" SET "time" = ?, "updated_at" = ? WHERE "appointments"."id" = ?[0m  [["time", "2020-04-18 02:15:00"], ["updated_at", "2020-04-18 07:12:46.358052"], ["id", 5]]
+  [1m[35m (2.4ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/appointments/5
+Completed 302 Found in 35ms (ActiveRecord: 6.5ms)
+
+
+Started GET "/appointments/5" for ::1 at 2020-04-18 02:12:46 -0500
+Processing by AppointmentsController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mAppointment Load (0.3ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  Rendering appointments/show.html.erb within layouts/application
+  Rendered appointments/show.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 66ms (Views: 57.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/appointments" for ::1 at 2020-04-18 02:13:02 -0500
+Processing by AppointmentsController#index as HTML
+  [1m[36mAppointment Load (0.3ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments"[0m
+  Rendering appointments/index.html.erb within layouts/application
+  Rendered appointments/index.html.erb within layouts/application (6.5ms)
+Completed 200 OK in 71ms (Views: 64.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/appointments/new" for ::1 at 2020-04-18 02:13:04 -0500
+Processing by AppointmentsController#new as HTML
+  Rendering appointments/new.html.erb within layouts/application
+  Rendered appointments/_form.html.erb (42.7ms)
+  Rendered appointments/new.html.erb within layouts/application (47.0ms)
+Completed 200 OK in 91ms (Views: 87.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/appointments" for ::1 at 2020-04-18 02:15:08 -0500
+Processing by AppointmentsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"jrSQJfTo8KmmxwzRFBCIpKVxNTai8nKsWMfxxIypkjd58MBV1nKB53a+EGAWvE1OH44PHxVCFI2faBizRs7Zow==", "appointment"=>{"name"=>"Jon", "phone_number"=>"13122825143", "time(1i)"=>"2020", "time(2i)"=>"4", "time(3i)"=>"18", "time(4i)"=>"02", "time(5i)"=>"16", "time_zone"=>"Central Time (US & Canada)"}, "commit"=>"Create Appointment"}
+Unpermitted parameter: :time_zone
+Unpermitted parameter: :time_zone
+  [1m[35m (0.4ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "appointments" ("name", "phone_number", "time", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Jon"], ["phone_number", "13122825143"], ["time", "2020-04-18 02:16:00"], ["created_at", "2020-04-18 07:15:08.084077"], ["updated_at", "2020-04-18 07:15:08.084077"]]
+  [1m[35mSQL (14.8ms)[0m  [1m[32mINSERT INTO "delayed_jobs" ("handler", "run_at", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["handler", "--- !ruby/object:Delayed::PerformableMethod\nobject: !ruby/object:Appointment\n  concise_attributes:\n  - !ruby/object:ActiveRecord::Attribute::FromDatabase\n    name: id\n    value_before_type_cast: 6\n  - !ruby/object:ActiveRecord::Attribute::FromDatabase\n    name: name\n    value_before_type_cast: Jon\n  - !ruby/object:ActiveRecord::Attribute::FromDatabase\n    name: phone_number\n    value_before_type_cast: '13122825143'\n  - !ruby/object:ActiveRecord::Attribute::FromDatabase\n    name: time\n    value_before_type_cast: 2020-04-18 02:16:00.000000000 Z\n  - !ruby/object:ActiveRecord::Attribute::FromDatabase\n    name: created_at\n    value_before_type_cast: &1 2020-04-18 07:15:08.084077000 Z\n  - !ruby/object:ActiveRecord::Attribute::FromDatabase\n    name: updated_at\n    value_before_type_cast: *1\n  new_record: false\n  active_record_yaml_version: 2\nmethod_name: :reminder_without_delay\nargs: []\n"], ["run_at", "2020-04-18 02:14:00"], ["created_at", "2020-04-18 07:15:08.114229"], ["updated_at", "2020-04-18 07:15:08.114229"]]
+  [1m[35m (2.6ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/appointments/6
+Completed 302 Found in 55ms (ActiveRecord: 19.2ms)
+
+
+Started GET "/appointments/6" for ::1 at 2020-04-18 02:15:08 -0500
+Processing by AppointmentsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mAppointment Load (0.3ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  Rendering appointments/show.html.erb within layouts/application
+  Rendered appointments/show.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 63ms (Views: 57.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/appointments" for ::1 at 2020-04-18 02:15:21 -0500
+Processing by AppointmentsController#index as HTML
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments"[0m
+  Rendering appointments/index.html.erb within layouts/application
+  Rendered appointments/index.html.erb within layouts/application (3.5ms)
+Completed 200 OK in 59ms (Views: 53.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/appointments/6" for ::1 at 2020-04-18 02:15:57 -0500
+Processing by AppointmentsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mAppointment Load (0.3ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  Rendering appointments/show.html.erb within layouts/application
+  Rendered appointments/show.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 69ms (Views: 43.0ms | ActiveRecord: 1.8ms)
+
+
+Started GET "/appointments/6/edit" for ::1 at 2020-04-18 02:15:59 -0500
+Processing by AppointmentsController#edit as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  Rendering appointments/edit.html.erb within layouts/application
+  Rendered appointments/_form.html.erb (44.5ms)
+  Rendered appointments/edit.html.erb within layouts/application (49.1ms)
+Completed 200 OK in 96ms (Views: 89.4ms | ActiveRecord: 0.2ms)
+
+
+Started PATCH "/appointments/6" for ::1 at 2020-04-18 02:16:11 -0500
+Processing by AppointmentsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"jE+7CcMnS98Ay2tnyfF5z41v+rdYINikU7tER4I84RjrVDpMjX/npjqbxqjSBD81WRQVH0FQAzIoVDLjjVrGQw==", "appointment"=>{"name"=>"Jon", "phone_number"=>"13122825143", "time(1i)"=>"2020", "time(2i)"=>"4", "time(3i)"=>"18", "time(4i)"=>"02", "time(5i)"=>"17", "time_zone"=>"Central Time (US & Canada)"}, "commit"=>"Update Appointment", "id"=>"6"}
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+Unpermitted parameter: :time_zone
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[33mUPDATE "appointments" SET "time" = ?, "updated_at" = ? WHERE "appointments"."id" = ?[0m  [["time", "2020-04-18 02:17:00"], ["updated_at", "2020-04-18 07:16:11.429009"], ["id", 6]]
+  [1m[35m (5.7ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/appointments/6
+Completed 302 Found in 13ms (ActiveRecord: 6.6ms)
+
+
+Started GET "/appointments/6" for ::1 at 2020-04-18 02:16:11 -0500
+Processing by AppointmentsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  Rendering appointments/show.html.erb within layouts/application
+  Rendered appointments/show.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 47ms (Views: 43.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/appointments" for ::1 at 2020-04-18 02:17:06 -0500
+Processing by AppointmentsController#index as HTML
+  [1m[36mAppointment Load (0.4ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments"[0m
+  Rendering appointments/index.html.erb within layouts/application
+  Rendered appointments/index.html.erb within layouts/application (5.1ms)
+Completed 200 OK in 48ms (Views: 41.7ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/appointments/6/edit" for ::1 at 2020-04-18 02:18:32 -0500
+Processing by AppointmentsController#edit as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  Rendering appointments/edit.html.erb within layouts/application
+  Rendered appointments/_form.html.erb (40.5ms)
+  Rendered appointments/edit.html.erb within layouts/application (44.4ms)
+Completed 200 OK in 92ms (Views: 85.1ms | ActiveRecord: 0.2ms)
+
+
+Started PATCH "/appointments/6" for ::1 at 2020-04-18 02:19:36 -0500
+Processing by AppointmentsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"/Xalv7xvMeXbXyGI64gZaibUd+i/IgXNhW3xVj14A+eabST68jednOEPjEfwfV+Q8q+YQKZS3lv+gofyMh4kvA==", "appointment"=>{"name"=>"Jon", "phone_number"=>"13122825143", "time(1i)"=>"2020", "time(2i)"=>"4", "time(3i)"=>"18", "time(4i)"=>"02", "time(5i)"=>"20", "time_zone"=>"Central Time (US & Canada)"}, "commit"=>"Update Appointment", "id"=>"6"}
+  [1m[36mAppointment Load (0.7ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+Unpermitted parameter: :time_zone
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE "appointments" SET "time" = ?, "updated_at" = ? WHERE "appointments"."id" = ?[0m  [["time", "2020-04-18 02:20:00"], ["updated_at", "2020-04-18 07:19:36.616900"], ["id", 6]]
+  [1m[35m (5.7ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/appointments/6
+Completed 302 Found in 33ms (ActiveRecord: 8.3ms)
+
+
+Started GET "/appointments/6" for ::1 at 2020-04-18 02:19:36 -0500
+Processing by AppointmentsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  Rendering appointments/show.html.erb within layouts/application
+  Rendered appointments/show.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 51ms (Views: 45.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/appointments/6/edit" for ::1 at 2020-04-18 02:19:52 -0500
+Processing by AppointmentsController#edit as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mAppointment Load (0.3ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  Rendering appointments/edit.html.erb within layouts/application
+  Rendered appointments/_form.html.erb (57.5ms)
+  Rendered appointments/edit.html.erb within layouts/application (61.5ms)
+Completed 200 OK in 109ms (Views: 103.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/appointments/6" for ::1 at 2020-04-18 02:19:56 -0500
+Processing by AppointmentsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  Rendering appointments/show.html.erb within layouts/application
+  Rendered appointments/show.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 63ms (Views: 56.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/appointments/6/edit" for ::1 at 2020-04-18 02:20:22 -0500
+Processing by AppointmentsController#edit as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  Rendering appointments/edit.html.erb within layouts/application
+  Rendered appointments/_form.html.erb (67.3ms)
+  Rendered appointments/edit.html.erb within layouts/application (73.5ms)
+Completed 200 OK in 148ms (Views: 142.2ms | ActiveRecord: 0.2ms)
+
+
+Started PATCH "/appointments/6" for ::1 at 2020-04-18 02:20:34 -0500
+Processing by AppointmentsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"zz4Xp8VuG1wNYz0Rm0iERBJIuSoEwj40h1ID0RifOj+oJZbiiza3JTczkN6AvcK+xjNWgh2y5aL8vXV1F/kdZA==", "appointment"=>{"name"=>"Jon", "phone_number"=>"13122825143", "time(1i)"=>"2020", "time(2i)"=>"4", "time(3i)"=>"18", "time(4i)"=>"02", "time(5i)"=>"21", "time_zone"=>"Central Time (US & Canada)"}, "commit"=>"Update Appointment", "id"=>"6"}
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+Unpermitted parameter: :time_zone
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[33mUPDATE "appointments" SET "time" = ?, "updated_at" = ? WHERE "appointments"."id" = ?[0m  [["time", "2020-04-18 02:21:00"], ["updated_at", "2020-04-18 07:20:34.082964"], ["id", 6]]
+  [1m[35m (6.0ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/appointments/6
+Completed 302 Found in 18ms (ActiveRecord: 7.1ms)
+
+
+Started GET "/appointments/6" for ::1 at 2020-04-18 02:20:34 -0500
+Processing by AppointmentsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  Rendering appointments/show.html.erb within layouts/application
+  Rendered appointments/show.html.erb within layouts/application (1.2ms)
+Completed 200 OK in 53ms (Views: 46.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/appointments/6" for ::1 at 2020-04-18 02:20:37 -0500
+Processing by AppointmentsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mAppointment Load (0.3ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  Rendering appointments/show.html.erb within layouts/application
+  Rendered appointments/show.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 48ms (Views: 42.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/appointments" for ::1 at 2020-04-18 02:20:42 -0500
+Processing by AppointmentsController#index as HTML
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments"[0m
+  Rendering appointments/index.html.erb within layouts/application
+  Rendered appointments/index.html.erb within layouts/application (4.4ms)
+Completed 200 OK in 55ms (Views: 49.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/appointments/new" for ::1 at 2020-04-18 02:21:19 -0500
+Processing by AppointmentsController#new as HTML
+  Rendering appointments/new.html.erb within layouts/application
+  Rendered appointments/_form.html.erb (40.7ms)
+  Rendered appointments/new.html.erb within layouts/application (46.2ms)
+Completed 200 OK in 93ms (Views: 87.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/appointments" for ::1 at 2020-04-18 02:21:44 -0500
+Processing by AppointmentsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Jdgs4nfQx0frROFIqdTvScpIoqJtN36STUz5yjk6RxrSnHySVUq2CTs9/fmreCqjcLeYi9qHGLOK4xC9810Mjg==", "appointment"=>{"name"=>"way to go", "phone_number"=>"13122825143", "time(1i)"=>"2020", "time(2i)"=>"4", "time(3i)"=>"18", "time(4i)"=>"07", "time(5i)"=>"22", "time_zone"=>"Central Time (US & Canada)"}, "commit"=>"Create Appointment"}
+Unpermitted parameter: :time_zone
+Unpermitted parameter: :time_zone
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "appointments" ("name", "phone_number", "time", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "way to go"], ["phone_number", "13122825143"], ["time", "2020-04-18 07:22:00"], ["created_at", "2020-04-18 07:21:44.213716"], ["updated_at", "2020-04-18 07:21:44.213716"]]
+  [1m[35m (0.7ms)[0m  [1m[31mrollback transaction[0m
+Completed 500 Internal Server Error in 253ms (ActiveRecord: 1.4ms)
+
+
+  
+Twilio::REST::RestError ([HTTP 404] 20404 : Unable to create record
+The requested resource /2010-04-01/Accounts//Messages.json was not found
+https://www.twilio.com/docs/errors/20404
+
+):
+  
+app/models/appointment.rb:22:in `reminder'
+app/controllers/appointments_controller.rb:34:in `block in create'
+app/controllers/appointments_controller.rb:33:in `create'
+Started POST "/appointments" for ::1 at 2020-04-18 02:22:45 -0500
+Processing by AppointmentsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Jdgs4nfQx0frROFIqdTvScpIoqJtN36STUz5yjk6RxrSnHySVUq2CTs9/fmreCqjcLeYi9qHGLOK4xC9810Mjg==", "appointment"=>{"name"=>"way to go", "phone_number"=>"13122825143", "time(1i)"=>"2020", "time(2i)"=>"4", "time(3i)"=>"18", "time(4i)"=>"07", "time(5i)"=>"22", "time_zone"=>"Central Time (US & Canada)"}, "commit"=>"Create Appointment"}
+Unpermitted parameter: :time_zone
+Unpermitted parameter: :time_zone
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "appointments" ("name", "phone_number", "time", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "way to go"], ["phone_number", "13122825143"], ["time", "2020-04-18 07:22:00"], ["created_at", "2020-04-18 07:22:45.157058"], ["updated_at", "2020-04-18 07:22:45.157058"]]
+  [1m[35m (5.6ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/appointments/7
+Completed 302 Found in 308ms (ActiveRecord: 7.5ms)
+
+
+Started GET "/appointments/7" for ::1 at 2020-04-18 02:22:45 -0500
+Processing by AppointmentsController#show as HTML
+  Parameters: {"id"=>"7"}
+  [1m[36mAppointment Load (0.3ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  Rendering appointments/show.html.erb within layouts/application
+  Rendered appointments/show.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 73ms (Views: 64.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/appointments" for ::1 at 2020-04-18 02:23:13 -0500
+Processing by AppointmentsController#index as HTML
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments"[0m
+  Rendering appointments/index.html.erb within layouts/application
+  Rendered appointments/index.html.erb within layouts/application (6.0ms)
+Completed 200 OK in 81ms (Views: 55.6ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/appointments/new" for ::1 at 2020-04-18 02:23:15 -0500
+Processing by AppointmentsController#new as HTML
+  Rendering appointments/new.html.erb within layouts/application
+  Rendered appointments/_form.html.erb (46.8ms)
+  Rendered appointments/new.html.erb within layouts/application (54.8ms)
+Completed 200 OK in 102ms (Views: 98.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/appointments" for ::1 at 2020-04-18 02:23:51 -0500
+Processing by AppointmentsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ViQptBdJ5rWAfD9m0WzparKJRH722Mi9SqbfysFmhOWhYHnENdOX+1AFI9fTwCyACHZ+V0ForpyNCTa9CwHPcQ==", "appointment"=>{"name"=>"quest1", "phone_number"=>"13122825143", "time(1i)"=>"2020", "time(2i)"=>"4", "time(3i)"=>"18", "time(4i)"=>"07", "time(5i)"=>"26", "time_zone"=>"Central Time (US & Canada)"}, "commit"=>"Create Appointment"}
+Unpermitted parameter: :time_zone
+Unpermitted parameter: :time_zone
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "appointments" ("name", "phone_number", "time", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "quest1"], ["phone_number", "13122825143"], ["time", "2020-04-18 07:26:00"], ["created_at", "2020-04-18 07:23:51.852028"], ["updated_at", "2020-04-18 07:23:51.852028"]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "delayed_jobs" ("handler", "run_at", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["handler", "--- !ruby/object:Delayed::PerformableMethod\nobject: !ruby/object:Appointment\n  concise_attributes:\n  - !ruby/object:ActiveRecord::Attribute::FromDatabase\n    name: id\n    value_before_type_cast: 8\n  - !ruby/object:ActiveRecord::Attribute::FromDatabase\n    name: name\n    value_before_type_cast: quest1\n  - !ruby/object:ActiveRecord::Attribute::FromDatabase\n    name: phone_number\n    value_before_type_cast: '13122825143'\n  - !ruby/object:ActiveRecord::Attribute::FromDatabase\n    name: time\n    value_before_type_cast: 2020-04-18 07:26:00.000000000 Z\n  - !ruby/object:ActiveRecord::Attribute::FromDatabase\n    name: created_at\n    value_before_type_cast: &1 2020-04-18 07:23:51.852028000 Z\n  - !ruby/object:ActiveRecord::Attribute::FromDatabase\n    name: updated_at\n    value_before_type_cast: *1\n  new_record: false\n  active_record_yaml_version: 2\nmethod_name: :reminder_without_delay\nargs: []\n"], ["run_at", "2020-04-18 07:24:00"], ["created_at", "2020-04-18 07:23:51.857648"], ["updated_at", "2020-04-18 07:23:51.857648"]]
+  [1m[35m (2.6ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/appointments/8
+Completed 302 Found in 16ms (ActiveRecord: 3.8ms)
+
+
+Started GET "/appointments/8" for ::1 at 2020-04-18 02:23:51 -0500
+Processing by AppointmentsController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mAppointment Load (0.6ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  Rendering appointments/show.html.erb within layouts/application
+  Rendered appointments/show.html.erb within layouts/application (1.2ms)
+Completed 200 OK in 46ms (Views: 39.8ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/appointments" for ::1 at 2020-04-18 02:25:48 -0500
+Processing by AppointmentsController#index as HTML
+  [1m[36mAppointment Load (0.3ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments"[0m
+  Rendering appointments/index.html.erb within layouts/application
+  Rendered appointments/index.html.erb within layouts/application (5.3ms)
+Completed 200 OK in 62ms (Views: 57.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/appointments/8/edit" for ::1 at 2020-04-18 02:26:01 -0500
+Processing by AppointmentsController#edit as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  Rendering appointments/edit.html.erb within layouts/application
+  Rendered appointments/_form.html.erb (43.9ms)
+  Rendered appointments/edit.html.erb within layouts/application (49.3ms)
+Completed 200 OK in 98ms (Views: 91.7ms | ActiveRecord: 0.2ms)
+
+
+Started PATCH "/appointments/8" for ::1 at 2020-04-18 02:26:06 -0500
+Processing by AppointmentsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"yx9GjgwhSOV52J/AhxFE2/JudcBmTvrj3j73cA82xv6flyryaPJfcOKekQM+UtY2fDHjWPf/bo0uwwg0jrAflw==", "appointment"=>{"name"=>"quest1", "phone_number"=>"13122825143", "time(1i)"=>"2020", "time(2i)"=>"4", "time(3i)"=>"18", "time(4i)"=>"07", "time(5i)"=>"26", "time_zone"=>"Central Time (US & Canada)"}, "commit"=>"Update Appointment", "id"=>"8"}
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+Unpermitted parameter: :time_zone
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/appointments/8
+Completed 302 Found in 7ms (ActiveRecord: 0.4ms)
+
+
+Started GET "/appointments/8" for ::1 at 2020-04-18 02:26:06 -0500
+Processing by AppointmentsController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  Rendering appointments/show.html.erb within layouts/application
+  Rendered appointments/show.html.erb within layouts/application (1.2ms)
+Completed 200 OK in 55ms (Views: 50.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/appointments/8/edit" for ::1 at 2020-04-18 02:28:02 -0500
+Processing by AppointmentsController#edit as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  Rendering appointments/edit.html.erb within layouts/application
+  Rendered appointments/_form.html.erb (45.5ms)
+  Rendered appointments/edit.html.erb within layouts/application (50.3ms)
+Completed 200 OK in 98ms (Views: 93.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/appointments/8" for ::1 at 2020-04-18 02:28:11 -0500
+Processing by AppointmentsController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  Rendering appointments/show.html.erb within layouts/application
+  Rendered appointments/show.html.erb within layouts/application (1.6ms)
+Completed 200 OK in 74ms (Views: 67.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/appointments" for ::1 at 2020-04-18 02:28:14 -0500
+Processing by AppointmentsController#index as HTML
+  [1m[36mAppointment Load (0.4ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments"[0m
+  Rendering appointments/index.html.erb within layouts/application
+  Rendered appointments/index.html.erb within layouts/application (5.3ms)
+Completed 200 OK in 59ms (Views: 52.8ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/appointments/new" for ::1 at 2020-04-18 02:28:16 -0500
+Processing by AppointmentsController#new as HTML
+  Rendering appointments/new.html.erb within layouts/application
+  Rendered appointments/_form.html.erb (51.8ms)
+  Rendered appointments/new.html.erb within layouts/application (56.3ms)
+Completed 200 OK in 107ms (Views: 102.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/appointments" for ::1 at 2020-04-18 02:28:51 -0500
+Processing by AppointmentsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"8t7G8ICjUWjh6FgNbiG45/OHGtpMltmmxEYilobW/ccFmpaAojkgJjGRRLxsjX0NSXgg8/smv4cD6cvhTLG2Uw==", "appointment"=>{"name"=>"now now?", "phone_number"=>"13122825143", "time(1i)"=>"2020", "time(2i)"=>"4", "time(3i)"=>"18", "time(4i)"=>"07", "time(5i)"=>"32", "time_zone"=>"Central Time (US & Canada)"}, "commit"=>"Create Appointment"}
+Unpermitted parameter: :time_zone
+Unpermitted parameter: :time_zone
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "appointments" ("name", "phone_number", "time", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "now now?"], ["phone_number", "13122825143"], ["time", "2020-04-18 07:32:00"], ["created_at", "2020-04-18 07:28:51.570621"], ["updated_at", "2020-04-18 07:28:51.570621"]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "delayed_jobs" ("handler", "run_at", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["handler", "--- !ruby/object:Delayed::PerformableMethod\nobject: !ruby/object:Appointment\n  concise_attributes:\n  - !ruby/object:ActiveRecord::Attribute::FromDatabase\n    name: id\n    value_before_type_cast: 9\n  - !ruby/object:ActiveRecord::Attribute::FromDatabase\n    name: name\n    value_before_type_cast: now now?\n  - !ruby/object:ActiveRecord::Attribute::FromDatabase\n    name: phone_number\n    value_before_type_cast: '13122825143'\n  - !ruby/object:ActiveRecord::Attribute::FromDatabase\n    name: time\n    value_before_type_cast: 2020-04-18 07:32:00.000000000 Z\n  - !ruby/object:ActiveRecord::Attribute::FromDatabase\n    name: created_at\n    value_before_type_cast: &1 2020-04-18 07:28:51.570621000 Z\n  - !ruby/object:ActiveRecord::Attribute::FromDatabase\n    name: updated_at\n    value_before_type_cast: *1\n  new_record: false\n  active_record_yaml_version: 2\nmethod_name: :reminder_without_delay\nargs: []\n"], ["run_at", "2020-04-18 07:30:00"], ["created_at", "2020-04-18 07:28:51.576181"], ["updated_at", "2020-04-18 07:28:51.576181"]]
+  [1m[35m (2.3ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/appointments/9
+Completed 302 Found in 16ms (ActiveRecord: 3.5ms)
+
+
+Started GET "/appointments/9" for ::1 at 2020-04-18 02:28:51 -0500
+Processing by AppointmentsController#show as HTML
+  Parameters: {"id"=>"9"}
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  Rendering appointments/show.html.erb within layouts/application
+  Rendered appointments/show.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 54ms (Views: 49.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/appointments/9/edit" for ::1 at 2020-04-18 02:29:17 -0500
+Processing by AppointmentsController#edit as HTML
+  Parameters: {"id"=>"9"}
+  [1m[36mAppointment Load (0.3ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  Rendering appointments/edit.html.erb within layouts/application
+  Rendered appointments/_form.html.erb (80.7ms)
+  Rendered appointments/edit.html.erb within layouts/application (87.1ms)
+Completed 200 OK in 170ms (Views: 140.9ms | ActiveRecord: 2.9ms)
+
+
+Started PATCH "/appointments/9" for ::1 at 2020-04-18 02:29:29 -0500
+Processing by AppointmentsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"/tk6BVZTUl9HP6PRFllN+RsF7qA/k8F6Son1/CGIA33zWcdYEHpBotBrjlgPEwQ4l5pGVsuXrourFvIGVNoX2w==", "appointment"=>{"name"=>"now now?", "phone_number"=>"13122825143", "time(1i)"=>"2020", "time(2i)"=>"4", "time(3i)"=>"18", "time(4i)"=>"07", "time(5i)"=>"31", "time_zone"=>"Central Time (US & Canada)"}, "commit"=>"Update Appointment", "id"=>"9"}
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+Unpermitted parameter: :time_zone
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  [1m[33mUPDATE "appointments" SET "time" = ?, "updated_at" = ? WHERE "appointments"."id" = ?[0m  [["time", "2020-04-18 07:31:00"], ["updated_at", "2020-04-18 07:29:29.767760"], ["id", 9]]
+  [1m[35m (6.0ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/appointments/9
+Completed 302 Found in 16ms (ActiveRecord: 7.3ms)
+
+
+Started GET "/appointments/9" for ::1 at 2020-04-18 02:29:29 -0500
+Processing by AppointmentsController#show as HTML
+  Parameters: {"id"=>"9"}
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  Rendering appointments/show.html.erb within layouts/application
+  Rendered appointments/show.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 52ms (Views: 47.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/appointments" for ::1 at 2020-04-18 02:29:43 -0500
+Processing by AppointmentsController#index as HTML
+  [1m[36mAppointment Load (0.4ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments"[0m
+  Rendering appointments/index.html.erb within layouts/application
+  Rendered appointments/index.html.erb within layouts/application (13.6ms)
+Completed 200 OK in 72ms (Views: 65.0ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/appointments/new" for ::1 at 2020-04-18 02:29:45 -0500
+Processing by AppointmentsController#new as HTML
+  Rendering appointments/new.html.erb within layouts/application
+  Rendered appointments/_form.html.erb (54.3ms)
+  Rendered appointments/new.html.erb within layouts/application (60.4ms)
+Completed 200 OK in 113ms (Views: 107.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/appointments" for ::1 at 2020-04-18 02:30:00 -0500
+Processing by AppointmentsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"AUc02MpvAakWLHhij2KBw66Qkdob8MmWcvNaLBZG0tP2A2So6PVw58ZVZNONzkQpFG+r86xAr7e1XLNb3CGZRw==", "appointment"=>{"name"=>"not now", "phone_number"=>"13122825143", "time(1i)"=>"2020", "time(2i)"=>"4", "time(3i)"=>"18", "time(4i)"=>"02", "time(5i)"=>"29", "time_zone"=>"Central Time (US & Canada)"}, "commit"=>"Create Appointment"}
+Unpermitted parameter: :time_zone
+Unpermitted parameter: :time_zone
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "appointments" ("name", "phone_number", "time", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "not now"], ["phone_number", "13122825143"], ["time", "2020-04-18 02:29:00"], ["created_at", "2020-04-18 07:30:00.783283"], ["updated_at", "2020-04-18 07:30:00.783283"]]
+  [1m[35m (2.2ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/appointments/10
+Completed 302 Found in 351ms (ActiveRecord: 2.8ms)
+
+
+Started GET "/appointments/10" for ::1 at 2020-04-18 02:30:01 -0500
+Processing by AppointmentsController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mAppointment Load (0.3ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+  Rendering appointments/show.html.erb within layouts/application
+  Rendered appointments/show.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 59ms (Views: 52.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/appointments" for ::1 at 2020-04-18 02:30:11 -0500
+Processing by AppointmentsController#index as HTML
+  [1m[36mAppointment Load (0.4ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments"[0m
+  Rendering appointments/index.html.erb within layouts/application
+  Rendered appointments/index.html.erb within layouts/application (5.9ms)
+Completed 200 OK in 62ms (Views: 55.0ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/appointments/9" for ::1 at 2020-04-18 02:30:16 -0500
+Processing by AppointmentsController#show as HTML
+  Parameters: {"id"=>"9"}
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  Rendering appointments/show.html.erb within layouts/application
+  Rendered appointments/show.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 52ms (Views: 45.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/appointments/9/edit" for ::1 at 2020-04-18 02:30:25 -0500
+Processing by AppointmentsController#edit as HTML
+  Parameters: {"id"=>"9"}
+  [1m[36mAppointment Load (0.3ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  Rendering appointments/edit.html.erb within layouts/application
+  Rendered appointments/_form.html.erb (47.1ms)
+  Rendered appointments/edit.html.erb within layouts/application (51.4ms)
+Completed 200 OK in 97ms (Views: 91.1ms | ActiveRecord: 0.2ms)
+
+
+Started PATCH "/appointments/9" for ::1 at 2020-04-18 02:30:32 -0500
+Processing by AppointmentsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"dnuumE11zmZ7tGBicekSIRsTMpkSCLjLWRGsrFjv3fF7+1PFC1zdm+zgTetoo1vgl4yab+YM1zq4jqtWLb3JVw==", "appointment"=>{"name"=>"now now?", "phone_number"=>"13122825143", "time(1i)"=>"2020", "time(2i)"=>"4", "time(3i)"=>"18", "time(4i)"=>"07", "time(5i)"=>"31", "time_zone"=>"Central Time (US & Canada)"}, "commit"=>"Update Appointment", "id"=>"9"}
+  [1m[36mAppointment Load (0.3ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+Unpermitted parameter: :time_zone
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/appointments/9
+Completed 302 Found in 9ms (ActiveRecord: 0.5ms)
+
+
+Started GET "/appointments/9" for ::1 at 2020-04-18 02:30:32 -0500
+Processing by AppointmentsController#show as HTML
+  Parameters: {"id"=>"9"}
+  [1m[36mAppointment Load (0.3ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  Rendering appointments/show.html.erb within layouts/application
+  Rendered appointments/show.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 57ms (Views: 49.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/appointments" for ::1 at 2020-04-18 02:30:37 -0500
+Processing by AppointmentsController#index as HTML
+  [1m[36mAppointment Load (0.3ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments"[0m
+  Rendering appointments/index.html.erb within layouts/application
+  Rendered appointments/index.html.erb within layouts/application (8.3ms)
+Completed 200 OK in 68ms (Views: 62.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/appointments/9" for ::1 at 2020-04-18 02:30:48 -0500
+Processing by AppointmentsController#show as HTML
+  Parameters: {"id"=>"9"}
+  [1m[36mAppointment Load (0.3ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  Rendering appointments/show.html.erb within layouts/application
+  Rendered appointments/show.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 62ms (Views: 55.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/appointments/9/edit" for ::1 at 2020-04-18 02:30:50 -0500
+Processing by AppointmentsController#edit as HTML
+  Parameters: {"id"=>"9"}
+  [1m[36mAppointment Load (0.3ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  Rendering appointments/edit.html.erb within layouts/application
+  Rendered appointments/_form.html.erb (46.3ms)
+  Rendered appointments/edit.html.erb within layouts/application (52.7ms)
+Completed 200 OK in 106ms (Views: 99.0ms | ActiveRecord: 0.3ms)
+
+
+Started PATCH "/appointments/9" for ::1 at 2020-04-18 02:30:59 -0500
+Processing by AppointmentsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"aoTkVbZbPBh8Z+awbucoc1Td5GZsgaHjKqNEa8uTADtnBBkI8HIv5eszyzl3rWGy2EJMkJiFzhLLPEORvsEUnQ==", "appointment"=>{"name"=>"now now?", "phone_number"=>"13122825143", "time(1i)"=>"2020", "time(2i)"=>"4", "time(3i)"=>"18", "time(4i)"=>"02", "time(5i)"=>"31", "time_zone"=>"Central Time (US & Canada)"}, "commit"=>"Update Appointment", "id"=>"9"}
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+Unpermitted parameter: :time_zone
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE "appointments" SET "time" = ?, "updated_at" = ? WHERE "appointments"."id" = ?[0m  [["time", "2020-04-18 02:31:00"], ["updated_at", "2020-04-18 07:30:59.144498"], ["id", 9]]
+  [1m[35m (5.8ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/appointments/9
+Completed 302 Found in 13ms (ActiveRecord: 6.6ms)
+
+
+Started GET "/appointments/9" for ::1 at 2020-04-18 02:30:59 -0500
+Processing by AppointmentsController#show as HTML
+  Parameters: {"id"=>"9"}
+  [1m[36mAppointment Load (0.3ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  Rendering appointments/show.html.erb within layouts/application
+  Rendered appointments/show.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 56ms (Views: 48.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/appointments" for ::1 at 2020-04-18 02:31:04 -0500
+Processing by AppointmentsController#index as HTML
+  [1m[36mAppointment Load (0.3ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments"[0m
+  Rendering appointments/index.html.erb within layouts/application
+  Rendered appointments/index.html.erb within layouts/application (6.5ms)
+Completed 200 OK in 58ms (Views: 52.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/appointments/new" for ::1 at 2020-04-18 02:31:41 -0500
+Processing by AppointmentsController#new as HTML
+  Rendering appointments/new.html.erb within layouts/application
+  Rendered appointments/_form.html.erb (58.1ms)
+  Rendered appointments/new.html.erb within layouts/application (63.7ms)
+Completed 200 OK in 142ms (Views: 115.5ms | ActiveRecord: 1.7ms)
+
+
+Started POST "/appointments" for ::1 at 2020-04-18 02:32:02 -0500
+Processing by AppointmentsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"P4zX2pINNDB+afDMjOa0Bh3x1KGt6d39DYHtaNZzl2jIyIeqsJdFfq4Q7H2OSnHspw7uiBpZu9zKLgQfHBTc/A==", "appointment"=>{"name"=>"ghost dogq", "phone_number"=>"13122825143", "time(1i)"=>"2020", "time(2i)"=>"4", "time(3i)"=>"18", "time(4i)"=>"02", "time(5i)"=>"31", "time_zone"=>"Central Time (US & Canada)"}, "commit"=>"Create Appointment"}
+Unpermitted parameter: :time_zone
+Unpermitted parameter: :time_zone
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "appointments" ("name", "phone_number", "time", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "ghost dogq"], ["phone_number", "13122825143"], ["time", "2020-04-18 02:31:00"], ["created_at", "2020-04-18 07:32:02.902484"], ["updated_at", "2020-04-18 07:32:02.902484"]]
+  [1m[35m (25.4ms)[0m  [1m[31mrollback transaction[0m
+Completed 500 Internal Server Error in 275ms (ActiveRecord: 26.1ms)
+
+
+  
+Twilio::REST::RestError ([HTTP 404] 20404 : Unable to create record
+The requested resource /2010-04-01/Accounts//Messages.json was not found
+https://www.twilio.com/docs/errors/20404
+
+):
+  
+app/models/appointment.rb:17:in `reminder'
+app/controllers/appointments_controller.rb:34:in `block in create'
+app/controllers/appointments_controller.rb:33:in `create'

@@ -6,25 +6,27 @@ class Appointment < ApplicationRecord
 
 	after_create :reminder
 
+
+
 	def reminder
-		@twilio_number = ENV['TWILIO_NUMBER']
-		account_sid = ENV['TWILIO_ACCOUNT_SID']
-		@client = Twilio::REST::Client.new account_sid, ENV['TWILIO_AUTH_TOKEN']
+		@twilio_number = Rails.application.secrets.TWILIO_NUMBER
+		account_sid = Rails.application.secrets.TWILIO_ACCOUNT_SID
+		@client = Twilio::REST::Client.new account_sid, Rails.application.secrets.TWILIO_AUTH_TOKEN
 		time_str = ((self.time).localtime).strftime("%I:%M%p on %b. %d, %Y")
-		body = "Hi #{self.name}. Just a reminder that you have an appointment coming at #{time_str}."
+		body = "Hi #{self.name}. Just a reminder that you have a new cooking step at #{time_str}."
 		message = @client.messages.create(
 			:from => @twilio_number,
-			:to => self.phone_number
-			:body => body,
+			:to => self.phone_number,
+			:body => body
 		)
 	end
 
 
 	def when_to_run
-		minutes_before_appointment = 0.5.minutes
+		minutes_before_appointment = 2.minutes
 		time - minutes_before_appointment
 	
 	end
 
-	handle_asynchronously :reminder, :run_at => Proc.new { |i| i.when_to_run }
+	#handle_asynchronously :reminder, :run_at => Proc.new { |i| i.when_to_run }
 end

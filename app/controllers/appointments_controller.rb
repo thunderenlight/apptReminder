@@ -13,11 +13,14 @@ class AppointmentsController < ApplicationController
   # GET /appointments/1
   # GET /appointments/1.json
   def show
+      p @twilio_number = Rails.application.secrets.TWILIO_AUTH_TOKEN
+      
   end
 
   # GET /appointments/new
   def new
     @appointment = Appointment.new
+    @min_date = DateTime.now
   end
 
   # GET /appointments/1/edit
@@ -73,6 +76,6 @@ class AppointmentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def appointment_params
-      params.require(:appointment).permit(:name, :phone_number, :time)
+      params.require(:appointment).permit(:name, :phone_number, :time, :time_zone)
     end
 end

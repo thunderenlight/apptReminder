@@ -16,9 +16,9 @@
   <%= @appointment.time_zone %>
 
 </p>
-
+<p><%= min = @appointment.update_reminder.to_i %></p>
 <p><%=Time.zone %></p>
-<p>So here is the time: <%= Time.now  %></p>
+<p>So here is the new time: <%= @appointment.trigger_update  %></p>
 
 
 <%= link_to 'Edit', edit_appointment_path(@appointment) %> |

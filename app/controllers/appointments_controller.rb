@@ -12,9 +12,7 @@ class AppointmentsController < ApplicationController
 
   # GET /appointments/1
   # GET /appointments/1.json
-  def show
-      p @twilio_number = Rails.application.secrets.TWILIO_AUTH_TOKEN
-      
+  def show 
   end
 
   # GET /appointments/new
@@ -41,6 +39,7 @@ class AppointmentsController < ApplicationController
         format.html { render :new }
         format.json { render json: @appointment.errors, status: :unprocessable_entity }
       end
+   
     end
   end
 
@@ -67,7 +66,8 @@ class AppointmentsController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+  
+ 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_appointment
@@ -78,4 +78,6 @@ class AppointmentsController < ApplicationController
     def appointment_params
       params.require(:appointment).permit(:name, :phone_number, :time, :time_zone)
     end
+
+
 end

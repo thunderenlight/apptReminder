@@ -36,8 +36,10 @@ gem 'jbuilder', '~> 2.5'
 gem 'twilio-ruby', '~> 5.33.1'
 
 # Use bootstrap themes
+gem 'therubyracer'
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
-
+gem 'less-rails'
+gem 'jquery-rails'
 # Use delayed job for running background jobs
 gem 'delayed_job_active_record'
 

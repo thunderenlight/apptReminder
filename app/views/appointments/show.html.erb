@@ -12,13 +12,13 @@
 
 <p>
   <strong>Time:</strong>
-  <%= @appointment.time %>
+  <%= @appointment.time.strftime("%I:%M%p on %b %d") %>
   <%= @appointment.time_zone %>
 
 </p>
 <p><%= min = @appointment.update_reminder.to_i %></p>
-<p><%=Time.zone %></p>
-<p>So here is the new time: <%= @appointment.trigger_update  %></p>
+<p><%=Time.now.localtime.strftime("%I:%M%p on %b %d") %></p>
+<p>So here is the new set reminder time: <%= @appointment.time.localtime.strftime("%I:%M%p on %b %d")  %></p>
 
 
 <%= link_to 'Edit', edit_appointment_path(@appointment) %> |

@@ -11,27 +11,27 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :name %>
     <%= form.text_field :name, id: :appointment_name %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :phone_number %>
     <%= form.text_field :phone_number, id: :appointment_phone_number %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :time %>
     <%= form.datetime_select :time, id: :appointment_time %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :time_zone %>
     <%= form.time_zone_select :time_zone, ActiveSupport::TimeZone.all.sort, default: "Central Time (US & Canada)" %>
   </div>
 
-  <div class="actions">
+  <div class="btn btn-default">
     <%= form.submit %>
   </div>
 <% end %>

@@ -40,6 +40,8 @@ gem 'therubyracer'
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem 'less-rails'
 gem 'jquery-rails'
+gem 'momentjs-rails'
+gem 'bootstrap4-datetime-picker-rails'
 # Use delayed job for running background jobs
 gem 'delayed_job_active_record'
 

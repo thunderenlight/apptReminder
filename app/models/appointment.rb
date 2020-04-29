@@ -5,7 +5,8 @@ class Appointment < ApplicationRecord
 	validates :time, presence: true
 
 	after_save :reminder
-	
+	after_create :preset_update
+	 
 
 	def credentials
 		@twilio_number = Rails.application.secrets.TWILIO_NUMBER
@@ -20,7 +21,7 @@ class Appointment < ApplicationRecord
 		time_str = ((self.time).localtime).strftime("%I:%M%p on %b. %d, %Y")
 		time_now = Time.now
 		body = "Hi #{self.name}. Just a reminder that you have a new cooking step at #{time_str}.
-				When ready, reply with a number for how many needed to set reminder."
+				Reply with a number anumber in minutes to start a new reminder."
 		message = @client.messages.create(
 			:from => @twilio_number,
 			:to => self.phone_number,
@@ -28,12 +29,13 @@ class Appointment < ApplicationRecord
 		)
 	end
 
-	def preset(arg)
+	def preset
 		#case if bread gives you 3 time slots for.each step.new or
 		#reminder.new or send 3 appointments by slots =3 until slots = 0
 		#they have their own time if cookies time slot1 = 2hrs, 
-
+		
 	end
+	
 	def msgs
 		credentials()
 		@next_time = [] 	
@@ -48,26 +50,39 @@ class Appointment < ApplicationRecord
 		return @next_time
 	end
 
- 	def update_reminder() 
- 		#if from self and contains a number updatez
+ 	def time_to_remind() 
+ 		
  		@new_time = msgs.first
+ 		
  		#what time
  		#self.update(params[:time], @new_time)
  		#puts @reset_time
  		
  	end
-
- 	def trigger_update
- 		min = update_reminder.to_i
+	def trigger_update
+ 		min = time_to_remind.to_i
  		advance = Time.new.advance(minutes: min)
  		self.update_attributes!(time: advance)
  		return self.time
+ 	end
+
+ 	def preset_update
+ 		#hash of step, times steps = step.times do an update with step[time]=min
+ 		if self.name.strip == "breadmaker"
+	 		min = 7
+	 		advance = self.time.advance(minutes: min)
+	 		self.update_attributes!(time: advance)
+	 		return self.time
+ 		end
  	end
 
 	def when_to_run
 		minutes_before_appointment = 2.minutes
 		time - minutes_before_appointment
 	
+	end
+	def preset_when_to_run
+		self.time + 1.minutes
 	end
 
 	def sms
@@ -80,6 +95,8 @@ class Appointment < ApplicationRecord
 
 
 	
+	handle_asynchronously :preset_update, :run_at => Proc.new { |i| i.preset_when_to_run }
 
 	handle_asynchronously :reminder, :run_at => Proc.new { |i| i.when_to_run }
+
 end

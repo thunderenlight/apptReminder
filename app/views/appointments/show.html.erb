@@ -16,7 +16,6 @@
   <%= @appointment.time_zone %>
 
 </p>
-<p><%= min = @appointment.update_reminder.to_i %></p>
 <p><%=Time.now.localtime.strftime("%I:%M%p on %b %d") %></p>
 <p>So here is the new set reminder time: <%= @appointment.time.localtime.strftime("%I:%M%p on %b %d")  %></p>
 

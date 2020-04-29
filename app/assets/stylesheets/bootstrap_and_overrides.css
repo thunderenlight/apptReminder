@@ -4,3 +4,6 @@
   Static version of css will use Glyphicons sprites by default
   =require twitter-bootstrap-static/sprites
 */
+@import "twitter/bootstrap/tempusdominus-bootstrap-4.css"
+//= require moment
+//= require tempusdominus-bootstrap-4.js

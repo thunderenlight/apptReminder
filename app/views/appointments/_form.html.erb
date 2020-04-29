@@ -30,7 +30,19 @@
     <%= form.label :time_zone %>
     <%= form.time_zone_select :time_zone, ActiveSupport::TimeZone.all.sort, default: "Central Time (US & Canada)" %>
   </div>
-
+  <div class="col-md-5">
+    <div class="form-group">
+      <%= form.label :time, "Start Time", class: 'control-label' %>        
+      <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
+        <%= form.text_field(:time, 
+          value: form.object.time ? form.object.time.localtime.strftime('%I:%M %p') : nil, 
+          class: "form-control datetimepicker-input", data: {target:"#datetimepicker2"}) %>
+        <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
+          <div class="input-group-text"><span class="far fa-clock"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="btn btn-default">
     <%= form.submit %>
   </div>

@@ -1,21 +1,32 @@
 //$main-color: $coral;
 
 //==== custom ===
+
+// Links
+$linkColor:         #0069d6 !default;
+$linkColorHover:    darken($linkColor, 15) !default;
+
+
+
 .jumbotron {
+  margin-top: 60px;
   background-color: #ff9999;
   margin: 0;
 }
 .navbar {
   margin-bottom: 30px;
+  background-color: pink;
   width: 100%
 }
 .navbar-left {
   padding: 5.5rem;
 }
-.navbar {
+.navbar-brand {
   font-size: 1.5rem;
 }
-
+.fa-lg {
+ font-size: 4.2rem;
+}
 body {
   background-color: #fff;
   color: #333;
